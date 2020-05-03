@@ -6,7 +6,8 @@ const Store = require("../store/store").store;
 
 Vue.use(VueRouter);
 
-const routes = [{
+const routes = [
+    {
         path: "/",
         name: "Home",
         component: Home,
@@ -91,6 +92,20 @@ const routes = [{
             }
             if (Store.state.user.token) {
                 next('/');
+            }
+        }
+    },
+    {
+        path: "/workspace/if",
+        name: "If",
+        component: () => import("../views/workspace/If.vue"),
+        beforeEnter: (to, from, next) => {
+
+            Store.dispatch('FETCH_ACCESS_TOKEN');
+            if (!Store.state.user.token) {
+                next('/login');
+            } else {
+                next();
             }
         }
     }
