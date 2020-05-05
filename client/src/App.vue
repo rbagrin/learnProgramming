@@ -22,11 +22,17 @@ export default {
 </script>
 
 <style>
-/* #app {
-  background-image: url('https://cdn.pixabay.com/photo/2017/12/28/12/31/sketch-3045125_960_720.jpg')
-  background: url('../public/doodle2.jpg') no-repeat center center fixed;
+@font-face{
+    font-family: 'Modak', cursive;
+    src: url("https://fonts.googleapis.com/css2?family=Modak&display=swap") format("opentype");
+}
+#app {
+  background: url('https://cdn.pixabay.com/photo/2017/12/28/12/31/sketch-3045125_960_720.jpg') no-repeat center center fixed;
   background-size: cover;
   height: 100%;
   overflow: hidden;
-} */
+  font-family: 'Modak', cursive;
+}
+
+
 </style>

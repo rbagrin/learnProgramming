@@ -1,31 +1,57 @@
-<template>
+<template v-slot:activator="{ on }">
     <v-container fill-height grid-list-md text-xs-center class="container">
         <v-row justify="space-around" align="center" style="margin: 0; padding: 0">
             <v-col cols="12" md="4" xs="12">
                 <img src="@/assets/ionel-1.png" width="320px" height="550px">
             </v-col>
+            <v-dialog v-model="snackbar_true" max-width="600">
+
+            <v-card >
+                <v-card-title class="headline" style="text-size: 45px">Răspuns Corect!</v-card-title>
+                <v-card-text>
+                    <div>
+                        <p style="text-size: 35px">Tocmai ai deblocat ceasul de mână!</p>
+                    </div>
+                </v-card-text>
+                <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="green" text @click="snackbar_true = false">Următoarea întrebare</v-btn>
+                </v-card-actions>
+            </v-card>
+            </v-dialog>
             <v-col cols="12" md="7" xs="12">
-                <v-row style="background-color: #00f; height: 300px">
-                    <v-card color="#385F73" dark width=100% height=100% align="center">
+                <v-row>
+                    <v-card color="#004D40" width=100% height="350px" align="center" outlined>
 
-                        <v-card-text style="font-size: 25px">
-                            Daca <span>
-                                <div class="flexbox question">
-                                    <Board id="question">
+                        <v-card-text style="font-size: 25px; height: 290px; padding-rig: 10px; padding-top: 15px">
+                            <div class="instructions">
+                                <span class="statement">Dacă</span>
+                            </div>
+                            <div class="flexbox question"  style="background-color: red; margin:0; padding: 0">
+                                <Board id="question">
 
-                                    </Board>
-                                </div>
-                            </span><br>
-                            atunci du-te si mananca <br>
-                            altfel <br>
-                            du-te la joaca
+                                </Board>
+                            </div>
+                            <br><br>
+                            <div class="instructions">
+                                <span class="statement">atunci</span>
+                            </div>
+                            <div class="instructions">
+                                <span class="instruction">merg_să_mănânc<span style="color: #0F0">()</span></span>
+                            </div>
+                            <div class="instructions">
+                                <span class="statement">altfel</span>
+                            </div>
+                            <div class="instructions">
+                                <span class="instruction">merg_la_joacă<span style="color: #0F0">()</span></span>
+                            </div>
                         </v-card-text>
 
-                        <v-card-actions align='center'>
+                        <v-card-actions align='center' style="margin-right: 10px">
                             <v-spacer></v-spacer>
-                            <v-btn text color="#6f6">
+                            <v-btn color="#6f6" @click="check_answer()">
                                 <v-icon left>check_circle</v-icon>
-                                <span>VERIFICA</span>
+                                <span style="font-weight: bold; font-size: 20px">VERIFICĂ</span>
                             </v-btn>
                         </v-card-actions>
                     </v-card>
@@ -63,12 +89,18 @@ export default {
             dialog: false,
             snackbar: false,
             snackbarErr: false,
-            loading: false
+            loading: false,
+            snackbar_true: false
         };
     },
     methods: {
         async submit() {
 
+        },
+        check_answer() {
+
+            this.snackbar_true = true;
+            document.getElementById("question").innerHTML = ""
         }
     },
     components: { Board, Card }
@@ -79,10 +111,11 @@ export default {
 
 .container {
     height: 100%;
+    font-family: 'Modak', cursive;
 }
 
 #options {
-    background-color: red;
+    background-color: #000;
     height: 90px;
 }
 
@@ -125,6 +158,23 @@ p {
 
 .hovered {
     border: 2px solid red;
+}
+
+.statement {
+    font-size: 35px;
+    font-weight: 700;
+    color: #f33;
+}
+
+.instruction {
+    font-size: 30px;
+    font-weight: 700;
+    color: #f4f4f4;
+}
+
+.instructions {
+    padding-bottom: 17px;
+    margin-bottom: 5px;
 }
 
 </style>
