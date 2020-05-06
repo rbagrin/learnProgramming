@@ -69,6 +69,11 @@ const routes = [
         component: () => import("../views/About.vue")
     },
     {
+        path: "/contact",
+        name: "Contact",
+        component: () => import("../views/Contact.vue")
+    },
+    {
         path: "/faq/answers",
         name: "FAQAnswers",
         component: () => import("../views/FAQAnswers.vue"),
@@ -108,7 +113,77 @@ const routes = [
                 next();
             }
         }
-    }
+    },
+    {
+        path: "/workspace/while",
+        name: "While",
+        component: () => import("../views/workspace/While.vue"),
+        beforeEnter: (to, from, next) => {
+
+            Store.dispatch('FETCH_ACCESS_TOKEN');
+            if (!Store.state.user.token) {
+                next('/login');
+            } else {
+                next();
+            }
+        }
+    },
+    {
+        path: "/workspace/for",
+        name: "For",
+        component: () => import("../views/workspace/For.vue"),
+        beforeEnter: (to, from, next) => {
+
+            Store.dispatch('FETCH_ACCESS_TOKEN');
+            if (!Store.state.user.token) {
+                next('/login');
+            } else {
+                next();
+            }
+        }
+    },
+    {
+        path: "/workspace/advanced",
+        name: "Advanced",
+        component: () => import("../views/workspace/Advanced.vue"),
+        beforeEnter: (to, from, next) => {
+
+            Store.dispatch('FETCH_ACCESS_TOKEN');
+            if (!Store.state.user.token) {
+                next('/login');
+            } else {
+                next();
+            }
+        }
+    },
+    {
+        path: "/awards",
+        name: "Awards",
+        component: () => import("../views/Awards.vue"),
+        beforeEnter: (to, from, next) => {
+
+            Store.dispatch('FETCH_ACCESS_TOKEN');
+            if (!Store.state.user.token) {
+                next('/login');
+            } else {
+                next();
+            }
+        }
+    },
+    {
+        path: "/todo",
+        name: "Todo",
+        component: () => import("../views/Todo.vue"),
+        beforeEnter: (to, from, next) => {
+
+            Store.dispatch('FETCH_ACCESS_TOKEN');
+            if (!Store.state.user.token) {
+                next('/login');
+            } else {
+                next();
+            }
+        }
+    },
 ];
 
 const router = new VueRouter({

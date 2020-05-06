@@ -26,10 +26,6 @@
                             <p style="text-size: 35px">Mai încearcă!</p>
                         </div>
                     </v-card-text>
-                    <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="green" text @click="snackbar_false = false">Următoarea întrebare</v-btn>
-                    </v-card-actions>
                 </v-card>
             </v-dialog>
             <v-col cols="12" md="7" xs="12">
@@ -38,7 +34,7 @@
 
                         <v-card-text style="font-size: 25px; height: 290px; padding-rig: 10px; padding-top: 15px">
                             <div class="instructions">
-                                <span class="statement">Dacă</span>
+                                <span class="statement">Cât timp</span>
                             </div>
                             <div class="flexbox question"  style="background-color: red; margin:0; padding: 0">
                                 <Board id="question">
@@ -47,7 +43,7 @@
                             </div>
                             <br><br>
                             <div class="instructions">
-                                <span class="statement">atunci</span>
+                                <span class="statement">execută</span>
                             </div>
                             <div class="instructions">
                                 <span class="instruction">merg_să_mănânc<span style="color: #0F0">()</span></span>

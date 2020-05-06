@@ -1,15 +1,15 @@
 <template>
-  <div class="if">
+  <div class="while">
     <Workspace />
   </div>
 </template>
 
 <script>
-import Workspace from "@/components/workspace/If";
+import Workspace from "@/components/workspace/While";
 
 
 export default {
-    name: "If",
+    name: "While",
     components: {
         Workspace
     }

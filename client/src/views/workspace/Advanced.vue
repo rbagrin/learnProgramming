@@ -1,15 +1,15 @@
 <template>
-  <div class="if">
+  <div class="advanced">
     <Workspace />
   </div>
 </template>
 
 <script>
-import Workspace from "@/components/workspace/If";
+import Workspace from "@/components/workspace/Advanced";
 
 
 export default {
-    name: "If",
+    name: "Advanced",
     components: {
         Workspace
     }

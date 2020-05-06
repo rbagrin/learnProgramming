@@ -1,15 +1,15 @@
 <template>
-  <div class="if">
+  <div class="for">
     <Workspace />
   </div>
 </template>
 
 <script>
-import Workspace from "@/components/workspace/If";
+import Workspace from "@/components/workspace/For";
 
 
 export default {
-    name: "If",
+    name: "For",
     components: {
         Workspace
     }

@@ -30,7 +30,8 @@
               <br />
               <v-layout row wrap justify-center align-end>
                 <v-btn
-                  class="light-green darken-2 white--text m3"
+                  class="#555 white--text m3"
+                  dark
                   large
                   @click="submit"
                   :loading="loading"

@@ -26,10 +26,6 @@
                             <p style="text-size: 35px">Mai încearcă!</p>
                         </div>
                     </v-card-text>
-                    <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="green" text @click="snackbar_false = false">Următoarea întrebare</v-btn>
-                    </v-card-actions>
                 </v-card>
             </v-dialog>
             <v-col cols="12" md="7" xs="12">

@@ -1,26 +1,26 @@
 <template>
   <nav>
-    <v-app-bar flat app class="green darken-3 white--text">
+    <v-app-bar flat app dark>
       <v-app-bar-nav-icon
         class="white--text"
         @click="drawer = !drawer"
-      ></v-app-bar-nav-icon>
+      ><v-icon>home</v-icon></v-app-bar-nav-icon>
       <v-toolbar-title>
-        <span class="font-weight-light">Let's</span>
-        <span>PROGRAM</span>
+        <span class="font-weight-light">HAI SĂ </span>
+        <span>PROGRAMĂM</span>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
 
-      <v-btn v-if="user" color="white" @click="logout">
+      <v-btn v-if="user" color="#555" @click="logout">
         <span>Sign Out</span>
         <v-icon right>exit_to_app</v-icon>
       </v-btn>
     </v-app-bar>
 
-    <v-navigation-drawer app temporary v-model="drawer" class="green darken-4">
+    <v-navigation-drawer app temporary v-model="drawer" dark color="#555">
       <v-list>
-        <v-subheader class="white--text">MENU</v-subheader>
+        <v-subheader class="red--text">MENU</v-subheader>
         <v-list-item-group>
           <v-list-item
             v-for="(item, i) in links"
@@ -53,10 +53,11 @@ export default {
     },
     computed: {
         user: function () {
-            return this.$store.state.user.user;
+            return this.$store.state.user.token;
         },
         links: function () {
-            if (this.$store.state.user.user) {
+
+            if (this.$store.state.user.token) {
                 return [
                     {
                         icon: "dashboard",
@@ -64,14 +65,29 @@ export default {
                         route: "/"
                     },
                     {
+                        icon: "emoji_events",
+                        text: "Premii",
+                        route: "/awards"
+                    },
+                    {
                         icon: "contact_support",
                         text: "FAQ",
                         route: "/faq"
                     },
                     {
+                        icon: "contact_phone",
+                        text: "Contact",
+                        route: "/contact"
+                    },
+                    {
                         icon: "info",
-                        text: "About",
+                        text: "Despre noi",
                         route: "/about"
+                    },
+                    {
+                        icon: "fa-spinner",
+                        text: "TODO",
+                        route: "/todo"
                     }
                 ];
             }

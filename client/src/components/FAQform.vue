@@ -2,22 +2,22 @@
   <div class="text-center">
     <v-dialog v-model="dialog" width="500">
       <template v-slot:activator="{ on }">
-        <v-btn color="green" dark v-on="on">
+        <v-btn color="#555" dark v-on="on">
           <v-icon left>add</v-icon>
-          <span>Question</span>
+          <span>Întrebare</span>
         </v-btn>
       </template>
 
       <v-card>
         <v-card-title class="headline grey lighten-2" primary-title>
-          Add new question:
+          Adaugă o întrebare:
         </v-card-title>
 
         <v-card-text>
           <v-textarea
             class="mx-2"
             v-model="question"
-            label="Ask your question"
+            label="Întrebă-ne ce vrei să știi"
             rows="1"
             prepend-icon="comment"
           ></v-textarea>
@@ -34,7 +34,7 @@
             :loading="loading"
             :disabled="loading"
           >
-            Submit
+            Întreabă
           </v-btn>
         </v-card-actions>
       </v-card>
