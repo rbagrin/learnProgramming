@@ -1,6 +1,8 @@
 <template>
-  <v-container class="faq my-5">
-    <h1>Frequently Asked Questions</h1>
+  <v-container class="faq my-5" style="background-color: #ddd;">
+    <v-row justify="center" align="center" style>
+        <h1>Întrebări frecvente</h1>
+    </v-row>
 
     <v-container fluid>
       <v-row class="justify-end">
@@ -15,7 +17,7 @@
           <v-textarea
             class="mx-2"
             v-model="answer"
-            label="Ask your question"
+            label="Răspunde la întrebare"
             rows="1"
             prepend-icon="comment"
             auto-grow

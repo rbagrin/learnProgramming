@@ -6,17 +6,17 @@
           <v-card-title>
             <h2>Login</h2>
           </v-card-title>
-          <v-alert color="error" :value="error">The username or the password are incorrect!</v-alert>
+          <v-alert color="error" :value="error">Username-ul sau parola sunt incorecte!</v-alert>
           <v-card-text>
             <v-form class="px-10" ref="form">
               <v-text-field
-                label="Username or e-mail"
+                label="Username sau e-mail"
                 v-model="username"
                 prepend-icon="account_circle"
                 :rules="inputRules"
               ></v-text-field>
               <v-text-field
-                label="Password"
+                label="Parolă"
                 v-model="password"
                 :rules="passwordRules"
                 :type="showPassword ? 'text' : 'password'"
@@ -43,7 +43,7 @@
             </v-form>
           </v-card-text>
           <v-container>
-            Don't have an account? <a href="register">Register here!</a>
+            Încă nu ai cont? <a href="register">Înregistrează-te aici!</a>
           </v-container>
         </v-card>
       </v-flex>

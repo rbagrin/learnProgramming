@@ -10,6 +10,7 @@
                     <v-card-text>
                         <div>
                             <p style="text-size: 35px">Tocmai ai deblocat ceasul de mână!</p>
+                            <img src="@/assets/watch.jpg" width="500px" height="250px">
                         </div>
                     </v-card-text>
                     <v-card-actions>
@@ -46,13 +47,13 @@
                                 <span class="statement">atunci</span>
                             </div>
                             <div class="instructions">
-                                <span class="instruction">merg_să_mănânc<span style="color: #0F0">()</span></span>
+                                <span class="instruction">joc_fotbal<span style="color: #0F0">()</span></span>
                             </div>
                             <div class="instructions">
                                 <span class="statement">altfel</span>
                             </div>
                             <div class="instructions">
-                                <span class="instruction">merg_la_joacă<span style="color: #0F0">()</span></span>
+                                <span class="instruction">joc_Minecraft<span style="color: #0F0">()</span></span>
                             </div>
                         </v-card-text>
 
@@ -70,14 +71,14 @@
                     <v-col id="option1box" class="flexbox options">
                         <Board id="option1">
                             <Card id="card-a" draggable="true">
-                                <p>îmi e foame</p>
+                                <p>îmi place fotbalul</p>
                             </Card>
                         </Board>
                     </v-col>
                     <v-col id="option2box" class="flexbox options">
                         <Board id="option2">
                             <Card id="card-b" draggable="true">
-                                <p>îmi e sete</p>
+                                <p>îmi plac jocurile</p>
                             </Card>
                         </Board>
                     </v-col>

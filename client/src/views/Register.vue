@@ -4,12 +4,12 @@
       <v-flex xs12 md6>
         <v-card elevation="1" height="100%" class="pa-3" color="#fff">
           <v-card-title>
-            <h2>Register</h2>
+            <h2>Înregistrare</h2>
           </v-card-title>
           <v-card-text>
             <v-form class="px-5" ref="form">
               <v-text-field
-                label="Name"
+                label="Nume"
                 v-model="name"
                 prepend-icon="account_circle"
                 :rules="inputRules"
@@ -21,7 +21,7 @@
                 :rules="emailRules"
               ></v-text-field>
               <v-text-field
-                label="Password"
+                label="Parolă"
                 v-model="password"
                 :rules="passwordRules"
                 :type="showPassword ? 'text' : 'password'"
@@ -33,7 +33,7 @@
                 id="pass"
               ></v-text-field>
               <v-text-field
-                label="Repeat Password"
+                label="Repetă parola"
                 v-model="password2"
                 :rules="passwordRules2"
                 :type="showPassword ? 'text' : 'password'"
@@ -52,13 +52,13 @@
                   :loading="loading"
                 >
                   <v-icon left>email</v-icon>
-                  <span>Register</span>
+                  <span>Înregistrare</span>
                 </v-btn>
               </v-layout>
             </v-form>
           </v-card-text>
           <v-container>
-            Already have an account? <a href="login">Login here!</a>
+            Ai deja cont? <a href="login">Loghează-te aici!</a>
           </v-container>
         </v-card>
       </v-flex>
