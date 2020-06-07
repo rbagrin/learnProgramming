@@ -1,7 +1,14 @@
 const Users = require('../data').Users;
-const { hash, compare } = require('../../security/password');
-const { generateToken } = require('../../security/jwt');
-const { ServerError } = require('../../errors');
+const {
+    hash,
+    compare
+} = require('../../security/password');
+const {
+    generateToken
+} = require('../../security/jwt');
+const {
+    ServerError
+} = require('../../errors');
 
 const add = async (name, email, password, role) => {
 
@@ -29,11 +36,11 @@ const updateById = async (id, name, email, password) => {
 
     const hashPass = await hash(password);
 
-    await Users.findByIdAndUpdate(id, { 
+    await Users.findByIdAndUpdate(id, {
         $set: {
             "name": name,
             "email": email,
-            "password": hashPass 
+            "password": hashPass
         }
     });
 };
@@ -44,8 +51,15 @@ const deleteById = async (id) => {
 
 const logIn = async (username, password) => {
 
-    const user = await Users.findOne({email: username}).exec();
+    let user = await Users.findOne({
+        email: username
+    }).exec();
 
+    if (!user) {
+        user = await Users.findOne({
+            name: username
+        }).exec();
+    }
     if (!user) {
 
         throw new ServerError(`Nu exista userul ${username}`, 403);
@@ -57,21 +71,28 @@ const logIn = async (username, password) => {
 
         throw new ServerError(`Numele sau parola sunt gresite!`, 403);
     }
-        
+
     if (successfulLogin) {
 
         const payload = {
             id: user._id,
-            role: user.role
+            role: user.role,
         };
-    
-        return generateToken(payload);
+
+        return {
+            token: generateToken(payload),
+            name: user.name,
+            email: user.email,
+            user_role: user.role
+        };
     }
 };
 
 const register = async (name, email, password, role) => {
 
-    const user = await Users.findOne({email: email}).exec();
+    const user = await Users.findOne({
+        email: email
+    }).exec();
 
     if (user !== null) {
 

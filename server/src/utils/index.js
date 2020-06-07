@@ -11,7 +11,7 @@ const {
 const validateFields = (fields) => {
 
     for (let fieldName in fields) {
-        let fieldValue = fields[fieldName].value; 
+        let fieldValue = fields[fieldName].value;
         const fieldType = fields[fieldName].type;
 
         if (!fieldValue || fieldValue.length === 0) {

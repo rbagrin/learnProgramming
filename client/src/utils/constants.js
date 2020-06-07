@@ -7,6 +7,8 @@ module.exports = {
         LOGIN_URL: 'http://localhost:5000/users/login',
         REGISTER_URL: 'http://localhost:5000/users/register',
 
-        FAQS_URL: 'http://localhost:5000/faqs'
+        // ROUTES Constants
+        FAQS_URL: 'http://localhost:5000/faqs/',
+        USERS_URL: 'http://localhost:5000/users/'
     }
 };

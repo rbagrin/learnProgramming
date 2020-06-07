@@ -1,12 +1,28 @@
 const express = require('express');
 
 const UsersService = require('./services.js');
-const { validateFields } = require('../../utils');
-const { authorizeAndExtractToken } = require('../../security/jwt');
-const { authorizeRoles } = require('../../security/roles');
+const {
+    validateFields
+} = require('../../utils');
+const {
+    authorizeAndExtractToken
+} = require('../../security/jwt');
+const {
+    authorizeRoles
+} = require('../../security/roles');
 
 const UsersConstants = require('../../lib/Constants').Users;
-const {adminRole, supportRole, userRole} = UsersConstants.roles;
+const {
+    adminRole,
+    supportRole,
+    userRole
+} = UsersConstants.roles;
+
+const ROLES_MAPPING = {
+    [adminRole]: "admin",
+    [supportRole]: "support",
+    [userRole]: "user"
+};
 
 const router = express.Router();
 
@@ -14,14 +30,29 @@ router.get('/', authorizeAndExtractToken, authorizeRoles(adminRole), async (req,
 
     try {
 
-        const users = await UsersService.getAll();
-        res.json(users);
+        const allUsers = await UsersService.getAll();
+
+        const users = [];
+
+        allUsers.forEach((user) => {
+            users.push({
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                role: ROLES_MAPPING[user.role],
+            });
+        });
+
+        res.json({
+            success: true,
+            users: users
+        });
     } catch (err) {
         next(err);
     }
 });
 
-router.get('/:id', authorizeAndExtractToken, authorizeRoles(adminRole, supportRole, userRole), async (req, res, next) => {
+router.get('/:id', authorizeAndExtractToken, authorizeRoles(adminRole, supportRole), async (req, res, next) => {
 
     try {
 
@@ -38,7 +69,14 @@ router.post('/', authorizeAndExtractToken, authorizeRoles(adminRole), async (req
     const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
-    const role = userRole;
+    let role = userRole;
+
+    if (req.body.role === "admin") {
+        role = adminRole;
+    }
+    if (req.body.role === "support") {
+        role = supportRole;
+    }
 
     try {
 
@@ -141,12 +179,11 @@ router.delete('/:id', authorizeAndExtractToken, authorizeRoles(adminRole), async
 // Register & Login
 router.post('/login', async (req, res, next) => {
 
-    // TODO: @rbagrin Login with both username and email
     const username = req.body.username;
     const password = req.body.password;
 
     try {
-    
+
         const fieldsToBeValidated = {
             username: {
                 value: username,
@@ -160,15 +197,20 @@ router.post('/login', async (req, res, next) => {
 
         validateFields(fieldsToBeValidated);
 
-        const token = await UsersService.logIn(username, password);
+        const result = await UsersService.logIn(username, password);
 
         res.json({
             success: true,
-            token: token
+            token: result.token,
+            user: {
+                name: result.name,
+                email: result.email,
+                user_role: ROLES_MAPPING[result.user_role]
+            }
         });
 
-    } catch(err) {
-        
+    } catch (err) {
+
         next(err);
     }
 });
@@ -204,10 +246,10 @@ router.post('/register', async (req, res, next) => {
             success: true,
             message: "Successfully registered"
         });
-    } catch(err) {
+    } catch (err) {
 
         next(err);
-    }   
+    }
 });
 
 module.exports = router;

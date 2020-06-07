@@ -6,7 +6,6 @@
         @dragenter.stop
         @dragleave.stop
         @drop.stop
-
     >
         <slot />
     </div>

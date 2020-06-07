@@ -3,14 +3,9 @@ const jwt = require('jsonwebtoken');
 
 const UsersController = require('../DataProvider/Users/controller.js');
 const FaqsController = require('../DataProvider/Faqs/controller.js');
-const NewsController = require('../DataProvider/News/controller.js');
-const TasksController = require('../DataProvider/Tasks/controller.js');
 
 Router.use('/users', UsersController);
 Router.use('/faqs', FaqsController);
-Router.use('/news', NewsController);
-Router.use('/tasks', TasksController);
-
 
 // Welcome Page
 Router.get('/', (req, res) => {

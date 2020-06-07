@@ -1,21 +1,35 @@
 const express = require('express');
 
 const FaqsService = require('./services.js');
-const { validateFields } = require('../../utils');
-const { authorizeAndExtractToken } = require('../../security/jwt');
-const { authorizeRoles } = require('../../security/roles');
+const UsersService = require('../Users/services.js');
+const {
+    validateFields
+} = require('../../utils');
+const {
+    authorizeAndExtractToken
+} = require('../../security/jwt');
+const {
+    authorizeRoles
+} = require('../../security/roles');
 
 const UsersConstants = require('../../lib/Constants').Users;
-const {adminRole, supportRole, userRole} = UsersConstants.roles;
+const {
+    adminRole,
+    supportRole,
+    userRole
+} = UsersConstants.roles;
 
 const router = express.Router();
 
-router.get('/', authorizeAndExtractToken, authorizeRoles(adminRole, supportRole, userRole), async (req, res) => {
+router.get('/', authorizeAndExtractToken, authorizeRoles(adminRole, supportRole, userRole), async (req, res, next) => {
 
     try {
 
         const faqs = await FaqsService.getAll();
-        res.json({success: true, faqs: faqs});
+        res.json({
+            success: true,
+            faqs: faqs
+        });
     } catch (err) {
         // daca primesc eroare, pasez eroarea mai departe la handler-ul de errori declarat ca middleware
         next(err);
@@ -23,7 +37,7 @@ router.get('/', authorizeAndExtractToken, authorizeRoles(adminRole, supportRole,
 });
 
 
-router.get('/:id', authorizeAndExtractToken, authorizeRoles(adminRole, supportRole, userRole), async (req, res) => {
+router.get('/:id', authorizeAndExtractToken, authorizeRoles(adminRole, supportRole, userRole), async (req, res, next) => {
 
     try {
 
@@ -38,15 +52,26 @@ router.get('/:id', authorizeAndExtractToken, authorizeRoles(adminRole, supportRo
 router.post('/', authorizeAndExtractToken, authorizeRoles(adminRole, supportRole, userRole), async (req, res, next) => {
 
     const question = req.body.question;
+    const postedBy = req.body.postedBy;
+    const postedByEmail = req.body.postedByEmail;
     const answer = "";
     const answeredBy = "";
     const date = Date.now();
+    const important = false;
 
     try {
 
         const fieldsToBeValidated = {
             question: {
                 value: question,
+                type: 'ascii'
+            },
+            postedBy: {
+                value: postedBy,
+                type: 'ascii'
+            },
+            postedByEmail: {
+                value: postedByEmail,
                 type: 'ascii'
             },
             date: {
@@ -57,7 +82,7 @@ router.post('/', authorizeAndExtractToken, authorizeRoles(adminRole, supportRole
 
         validateFields(fieldsToBeValidated);
 
-        await FaqsService.add(question, answer, answeredBy, date);
+        await FaqsService.add(question, postedBy, postedByEmail, answer, answeredBy, date, important);
 
         res.json({
             success: true,
@@ -75,6 +100,8 @@ router.put('/:id', authorizeAndExtractToken, authorizeRoles(adminRole, supportRo
     const question = req.body.question;
     const answer = req.body.answer;
     const answeredBy = req.body.answeredBy;
+    const send_response_to = req.body.send_response_to;
+    const important = !!req.body.important;
 
     try {
 
@@ -90,12 +117,22 @@ router.put('/:id', authorizeAndExtractToken, authorizeRoles(adminRole, supportRo
             answeredBy: {
                 value: answeredBy,
                 type: 'ascii'
+            },
+            send_response_to: {
+                value: send_response_to,
+                type: 'ascii'
             }
         };
 
         validateFields(fieldsToBeValidated);
 
-        await FaqsService.updateById(id, question, answer, answeredBy);
+        await FaqsService.updateById(id, question, answer, answeredBy, important);
+        FaqsService.sendAnswer({
+            answer: answer,
+            answeredBy: answeredBy,
+            question: question,
+            send_response_to: send_response_to
+        })
 
         res.json({
             success: true,
@@ -107,7 +144,7 @@ router.put('/:id', authorizeAndExtractToken, authorizeRoles(adminRole, supportRo
     }
 });
 
-router.delete('/:id', authorizeAndExtractToken, authorizeRoles(adminRole, supportRole), async (req, res) => {
+router.delete('/:id', authorizeAndExtractToken, authorizeRoles(adminRole, supportRole), async (req, res, next) => {
 
     const id = req.params.id;
 

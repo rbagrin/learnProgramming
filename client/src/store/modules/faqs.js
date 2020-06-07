@@ -23,26 +23,26 @@ export default {
         }) {
 
             return fetch(FAQS_URL, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + localStorage.getItem('access-token')
-                    },
-                    mode: "cors"
-                })
-                .then(res => res.json())
-                .then(res => {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem('access-token')
+                },
+                mode: "cors"
+            })
+            .then(res => res.json())
+            .then(res => {
 
-                    if (res.success) {
+                if (res.success) {
 
-                        commit("updateFaqs", res.faqs);
-                        return res.faqs;
-                    }
-                    return [];
-                })
-                .catch(err => {
-                    console.log(err);
-                    return [];
-                });
+                    commit("updateFaqs", res.faqs);
+                    return res.faqs;
+                }
+                return [];
+            })
+            .catch(err => {
+                console.log(err);
+                return [];
+            });
         },
 
         addFaq({
@@ -50,26 +50,26 @@ export default {
         }, faq) {
 
             return fetch("http://localhost:5000/faqs", {
-                    method: "POST",
-                    mode: "cors",
-                    cache: "no-cache",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": 'Bearer ' + localStorage.getItem('access-token')
-                    },
-                    body: JSON.stringify(faq)
-                })
-                .then(res => res.json())
-                .then(res => {
+                method: "POST",
+                mode: "cors",
+                cache: "no-cache",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": 'Bearer ' + localStorage.getItem('access-token')
+                },
+                body: JSON.stringify(faq)
+            })
+            .then(res => res.json())
+            .then(res => {
 
-                    dispatch("getFaqsFromDB");
-                    return res.success;
-                })
-                .catch(err => {
+                dispatch("getFaqsFromDB");
+                return res.success;
+            })
+            .catch(err => {
 
-                    console.log(err);
-                    return false;
-                })
+                console.log(err);
+                return false;
+            });
         },
 
         updateFaq({
@@ -77,24 +77,24 @@ export default {
         }, payload) {
 
             return fetch("http://localhost:5000/faqs/" + payload.questionId, {
-                    method: "PUT",
-                    mode: "cors",
-                    cache: "no-cache",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": 'Bearer ' + localStorage.getItem('access-token')
-                    },
-                    body: JSON.stringify(payload.data)
-                })
-                .then(res => res.json())
-                .then((res) => {
-                    dispatch("getFaqsFromDB");
-                    return res.success;
-                })
-                .catch(err => {
-                    console.log(err);
-                    return false;
-                });
+                method: "PUT",
+                mode: "cors",
+                cache: "no-cache",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": 'Bearer ' + localStorage.getItem('access-token')
+                },
+                body: JSON.stringify(payload.data)
+            })
+            .then(res => res.json())
+            .then((res) => {
+                dispatch("getFaqsFromDB");
+                return res.success;
+            })
+            .catch(err => {
+                console.log(err);
+                return false;
+            });
         },
 
         deleteFaq({
@@ -102,23 +102,23 @@ export default {
         }, questionId) {
 
             return fetch("http://localhost:5000/faqs/" + questionId, {
-                    method: "DELETE",
-                    mode: "cors",
-                    cache: "no-cache",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": 'Bearer ' + localStorage.getItem('access-token')
-                    }
-                })
-                .then((res) => {
+                method: "DELETE",
+                mode: "cors",
+                cache: "no-cache",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": 'Bearer ' + localStorage.getItem('access-token')
+                }
+            })
+            .then((res) => {
 
-                    dispatch("getFaqsFromDB");
-                    return res.status === 204;
-                })
-                .catch(err => {
-                    console.log(err);
-                    return false;
-                });
+                dispatch("getFaqsFromDB");
+                return res.status === 204;
+            })
+            .catch(err => {
+                console.log(err);
+                return false;
+            });
         }
     }
 };

@@ -14,7 +14,7 @@ const routes = [
         beforeEnter: (to, from, next) => {
 
             Store.dispatch('FETCH_ACCESS_TOKEN');
-            if (!Store.state.user.token) {
+            if (!Store.state.user.token || Store.state.user.token === "null") {
                 next('/login');
             } else {
                 next();
@@ -28,7 +28,7 @@ const routes = [
         beforeEnter: (to, from, next) => {
 
             Store.dispatch('FETCH_ACCESS_TOKEN');
-            if (Store.state.user.token) {
+            if (Store.state.user.token && Store.state.user.token !== "null") {
                 next('/');
             } else {
                 next();
@@ -42,10 +42,27 @@ const routes = [
         beforeEnter: (to, from, next) => {
 
             Store.dispatch('FETCH_ACCESS_TOKEN');
-            if (Store.state.user.token) {
+
+            if (Store.state.user.token && Store.state.user.token !== "null") {
                 next('/');
             } else {
                 next();
+            }
+        }
+    },
+    {
+        path: '/admin',
+        name: 'Admin',
+        component: () => import("../views/Admin.vue"),
+        beforeEnter: (to, from, next) => {
+
+            Store.dispatch('FETCH_ACCESS_TOKEN');
+            if (!Store.state.user.token || Store.state.user.token === "null") {
+                next('/login');
+            } else if (Store.state.user.user_role === "admin") {
+                next();
+            } else {
+                next('/')
             }
         }
     },
@@ -56,7 +73,21 @@ const routes = [
         beforeEnter: (to, from, next) => {
 
             Store.dispatch('FETCH_ACCESS_TOKEN');
-            if (!Store.state.user.token) {
+            if (!Store.state.user.token || Store.state.user.token === "null") {
+                next('/login');
+            } else {
+                next();
+            }
+        }
+    },
+    {
+        path: "/faq/answers",
+        name: "FAQAnswers",
+        component: () => import("../views/FAQAnswers.vue"),
+        beforeEnter: (to, from, next) => {
+
+            Store.dispatch('FETCH_ACCESS_TOKEN');
+            if (!Store.state.user.token || Store.state.user.token === "null") {
                 next('/login');
             } else {
                 next();
@@ -74,40 +105,13 @@ const routes = [
         component: () => import("../views/Contact.vue")
     },
     {
-        path: "/faq/answers",
-        name: "FAQAnswers",
-        component: () => import("../views/FAQAnswers.vue"),
-        beforeEnter: (to, from, next) => {
-
-            Store.dispatch('FETCH_ACCESS_TOKEN');
-            if (!Store.state.user.token) {
-                next('/login');
-            } else {
-                next();
-            }
-        }
-    },
-    {
-        path: '*',
-        beforeEnter: (to, from, next) => {
-
-            Store.dispatch('FETCH_ACCESS_TOKEN');
-            if (!Store.state.user.token) {
-                next('/login');
-            }
-            if (Store.state.user.token) {
-                next('/');
-            }
-        }
-    },
-    {
         path: "/workspace/if",
         name: "If",
         component: () => import("../views/workspace/If.vue"),
         beforeEnter: (to, from, next) => {
 
             Store.dispatch('FETCH_ACCESS_TOKEN');
-            if (!Store.state.user.token) {
+            if (!Store.state.user.token || Store.state.user.token === "null") {
                 next('/login');
             } else {
                 next();
@@ -121,7 +125,7 @@ const routes = [
         beforeEnter: (to, from, next) => {
 
             Store.dispatch('FETCH_ACCESS_TOKEN');
-            if (!Store.state.user.token) {
+            if (!Store.state.user.token || Store.state.user.token === "null") {
                 next('/login');
             } else {
                 next();
@@ -135,7 +139,7 @@ const routes = [
         beforeEnter: (to, from, next) => {
 
             Store.dispatch('FETCH_ACCESS_TOKEN');
-            if (!Store.state.user.token) {
+            if (!Store.state.user.token || Store.state.user.token === "null") {
                 next('/login');
             } else {
                 next();
@@ -149,7 +153,7 @@ const routes = [
         beforeEnter: (to, from, next) => {
 
             Store.dispatch('FETCH_ACCESS_TOKEN');
-            if (!Store.state.user.token) {
+            if (!Store.state.user.token || Store.state.user.token === "null") {
                 next('/login');
             } else {
                 next();
@@ -163,7 +167,7 @@ const routes = [
         beforeEnter: (to, from, next) => {
 
             Store.dispatch('FETCH_ACCESS_TOKEN');
-            if (!Store.state.user.token) {
+            if (!Store.state.user.token || Store.state.user.token === "null") {
                 next('/login');
             } else {
                 next();
@@ -177,10 +181,23 @@ const routes = [
         beforeEnter: (to, from, next) => {
 
             Store.dispatch('FETCH_ACCESS_TOKEN');
-            if (!Store.state.user.token) {
+            if (!Store.state.user.token || Store.state.user.token === "null") {
                 next('/login');
             } else {
                 next();
+            }
+        }
+    },
+    {
+        path: '*',
+        beforeEnter: (to, from, next) => {
+
+            Store.dispatch('FETCH_ACCESS_TOKEN');
+            if (!Store.state.user.token || Store.state.user.token === "null") {
+                next('/login');
+            }
+            if (Store.state.user.token) {
+                next('/');
             }
         }
     },

@@ -1,12 +1,6 @@
-<template>         
+<template>
     <v-item>
-        <v-card
-            :color="bColor"
-            class="d-flex align-center"
-            dark
-            :height='bHeight'
-            @click="routeTo()"
-        >
+        <v-card :color="bColor" class="d-flex align-center" dark :height='bHeight' @click="routeTo()">
             <v-scroll-y-transition>
                 <v-container class="display-3 flex-grow-1 text-center">
                     <v-row justify=center style="font-family: 'Modak', cursive;">
@@ -16,8 +10,6 @@
                         <v-icon style="font-size: 56px;">{{icon}}</v-icon>
                     </v-row>
                 </v-container>
-                
-                
             </v-scroll-y-transition>
         </v-card>
     </v-item>
@@ -30,6 +22,7 @@ export default {
     props: ['title', 'route', 'bHeight', 'bColor', 'icon'],
     methods: {
         routeTo: function () {
+
             router.push(this.route);
         }
     }

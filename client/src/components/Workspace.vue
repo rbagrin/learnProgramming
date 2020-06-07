@@ -5,7 +5,7 @@
                 <img src="@/assets/ionel-1.png" width="320px" height="550px">
             </v-col>
             <v-dialog v-model="snackbar_true" max-width="600">
-                <v-card >
+                <v-card>
                     <v-card-title class="headline" style="text-size: 45px">Răspuns Corect!</v-card-title>
                     <v-card-text>
                         <div>
@@ -13,13 +13,13 @@
                         </div>
                     </v-card-text>
                     <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="green" text @click="snackbar_true = false">Următoarea întrebare</v-btn>
+                        <v-spacer></v-spacer>
+                        <v-btn color="green" text @click="snackbar_true = false">Următoarea întrebare</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
             <v-dialog v-model="snackbar_false" max-width="600">
-                <v-card >
+                <v-card>
                     <v-card-title class="headline" style="text-size: 45px">Răspuns Incorect!</v-card-title>
                     <v-card-text>
                         <div>
@@ -27,8 +27,8 @@
                         </div>
                     </v-card-text>
                     <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="green" text @click="snackbar_false = false">Următoarea întrebare</v-btn>
+                        <v-spacer></v-spacer>
+                        <v-btn color="green" text @click="snackbar_false = false">Următoarea întrebare</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
@@ -40,7 +40,7 @@
                             <div class="instructions">
                                 <span class="statement">Dacă</span>
                             </div>
-                            <div class="flexbox question"  style="background-color: red; margin:0; padding: 0">
+                            <div class="flexbox question" style="background-color: red; margin:0; padding: 0">
                                 <Board id="question">
 
                                 </Board>
@@ -115,7 +115,7 @@ export default {
             } else {
                 this.snackbar_false = true;
             }
-            
+
         },
         isDescendant(parent, child) {
             var node = child.parentNode;
@@ -128,12 +128,14 @@ export default {
             return false;
         }
     },
-    components: { Board, Card }
+    components: {
+        Board,
+        Card
+    }
 };
 </script>
 
 <style scoped>
-
 .container {
     height: 100%;
     font-family: 'Modak', cursive;

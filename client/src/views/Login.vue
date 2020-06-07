@@ -1,54 +1,38 @@
 <template>
-  <v-container class="login">
-    <v-layout row wrap justify-space-around>
-      <v-flex xs12 md6>
-        <v-card elevation="5" height="100%" class="pa-3" color="#fff">
-          <v-card-title>
-            <h2>Login</h2>
-          </v-card-title>
-          <v-alert color="error" :value="error">Username-ul sau parola sunt incorecte!</v-alert>
-          <v-card-text>
-            <v-form class="px-10" ref="form">
-              <v-text-field
-                label="Username sau e-mail"
-                v-model="username"
-                prepend-icon="account_circle"
-                :rules="inputRules"
-              ></v-text-field>
-              <v-text-field
-                label="Parolă"
-                v-model="password"
-                :rules="passwordRules"
-                :type="showPassword ? 'text' : 'password'"
-                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                hint="At least 8 characters"
-                prepend-icon="fingerprint"
-                counter
-                @click:append="showPassword = !showPassword"
-                id="pass"
-              ></v-text-field>
-              <br />
-              <v-layout row wrap justify-center align-end>
-                <v-btn
-                  class="#555 white--text m3"
-                  dark
-                  large
-                  @click="submit"
-                  :loading="loading"
-                >
-                  <v-icon left>fingerprint</v-icon>
-                  <span>Login</span>
-                </v-btn>
-              </v-layout>
-            </v-form>
-          </v-card-text>
-          <v-container>
-            Încă nu ai cont? <a href="register">Înregistrează-te aici!</a>
-          </v-container>
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </v-container>
+    <v-container class="login">
+        <v-layout row wrap justify-space-around>
+            <v-flex xs12 md6>
+                <v-card elevation="5" height="100%" class="pa-3" color="#fff">
+                    <v-card-title>
+                        <h2>Login</h2>
+                    </v-card-title>
+                    <v-alert color="error" :value="error">The username or the password are incorrect!</v-alert>
+                    <v-card-text>
+                        <v-form class="px-10" ref="form">
+                            <v-text-field label="Username or e-mail" v-model="username" prepend-icon="account_circle"
+                                :rules="inputRules"></v-text-field>
+                            <v-text-field label="Password" v-model="password" :rules="passwordRules"
+                                :type="showPassword ? 'text' : 'password'"
+                                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'" hint="At least 8 characters"
+                                prepend-icon="fingerprint" counter @click:append="showPassword = !showPassword"
+                                id="pass"></v-text-field>
+                            <br />
+                            <v-layout row wrap justify-center align-end>
+                                <v-btn class="light-green darken-2 white--text m3" large @click="submit"
+                                    :loading="loading">
+                                    <v-icon left>fingerprint</v-icon>
+                                    <span>Login</span>
+                                </v-btn>
+                            </v-layout>
+                        </v-form>
+                    </v-card-text>
+                    <v-container>
+                        Don't have an account? <a href="register">Register here!</a>
+                    </v-container>
+                </v-card>
+            </v-flex>
+        </v-layout>
+    </v-container>
 </template>
 
 <script>
@@ -58,7 +42,7 @@ export default {
         return {
             showPassword: false,
             inputRules: [
-                v => (v && v.length >= 6) || "Minimum length is 6 characters"
+                v => (v && v.length >= 4) || "Minimum length is 6 characters"
             ],
             passwordRules: [
                 v => (v && v.length >= 8) || "Minimum length is 6 characters",
@@ -102,9 +86,9 @@ export default {
 
 <style scoped>
 .login {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 </style>

@@ -10,7 +10,7 @@ const hash = async (plainTextPassword) => {
 
 // va trebui sa folositi compare atunci cand primiti cerere de autentificare
 const compare = async (plainTextPassword, hashedPassword) => {
-    
+
     const isOk = await bcryptjs.compare(plainTextPassword, hashedPassword);
     return isOk;
 };

@@ -9,8 +9,8 @@ const authorizeRoles = (...roles) => {
         for (let i = 0; i < roles.length; i++) {
 
             if (req.state.decoded.role === roles[i]) {
-                
-                    return next();
+
+                return next();
             }
         }
         throw new ServerError('Nu sunteti autorizat sa accesati resursa!', 401);
