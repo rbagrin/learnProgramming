@@ -2,7 +2,7 @@
     <v-container fill-height grid-list-md text-xs-center class="container">
         <v-row justify="space-around" align="center" style="margin: 0; padding: 0">
             <v-col cols="12" md="4" xs="12">
-                <img src="@/assets/ionel-1.png" width="320px" height="550px">
+                <img src="@/assets/ionel-1.png" width="310px" height="520px">
             </v-col>
             <v-dialog v-model="snackbar_award" max-width="600">
                 <v-card>
@@ -61,13 +61,15 @@
                                 <span class="statement">{{questionSkeleton[questionCategory].mainPath}}</span>
                             </div>
                             <div class="instructions">
-                                <span class="instruction">{{questions[level].mainBranch}}<span style="color: #0F0">()</span></span>
+                                <span class="instruction">{{questions[level].mainBranch}}<span
+                                        style="color: #0F0">()</span></span>
                             </div>
                             <div class="instructions" v-if="questions[level].optionalBranch">
                                 <span class="statement">{{questionSkeleton[questionCategory].optionalPath}}</span>
                             </div>
                             <div class="instructions" v-if="questions[level].optionalBranch">
-                                <span class="instruction">{{questions[level].optionalBranch}}<span style="color: #0F0">()</span></span>
+                                <span class="instruction">{{questions[level].optionalBranch}}<span
+                                        style="color: #0F0">()</span></span>
                             </div>
                         </v-card-text>
 
@@ -106,6 +108,9 @@
 <script>
 import Board from "@/components/Board";
 import Card from "@/components/Card";
+import {
+    allQuestions
+} from "@/utils/questions.js";
 
 export default {
     props: ['category'],
@@ -120,68 +125,7 @@ export default {
             snackbar_award: false,
 
             level: 0, // TODO: Last question user accessed
-            allQuestions: [
-                {
-                    category: 0x01, // if
-                    level: 1,
-                    correctAnswer: 1,
-                    options: {
-                        1: "îmi place fotbalul",
-                        2: "îmi plac jocurile",
-                        totalOptions: 2
-                    },
-                    mainBranch: "joc_fotbal",
-                    optionalBranch: "joc_minecraft"
-                },
-                {
-                    category: 0x01, // if
-                    level: 2,
-                    correctAnswer: 2,
-                    options: {
-                        1: "îmi place AAAA",
-                        2: "îmi plac BBBB",
-                        totalOptions: 2
-                    },
-                    mainBranch: "joc_asdsadsa",
-                    optionalBranch: "joc_adsadsad"
-                },
-                {
-                    category: 0x01, // if
-                    level: 3,
-                    correctAnswer: 2,
-                    options: {
-                        1: "îmi place CCCCC",
-                        2: "îmi plac DDDDDD",
-                        totalOptions: 2
-                    },
-                    mainBranch: "joc_zxzxzx",
-                    optionalBranch: null
-                },
-                {
-                    category: 0x02, // while
-                    level: 4,
-                    correctAnswer: 2,
-                    options: {
-                        1: "îmi place EEEEEE",
-                        2: "îmi plac FFFFFFF",
-                        totalOptions: 2
-                    },
-                    mainBranch: "joc_gfghgffg",
-                    optionalBranch: null
-                },
-                {
-                    category: 0x03, // for
-                    level: 5,
-                    correctAnswer: 2,
-                    options: {
-                        1: "îmi place GGGGGGGGG",
-                        2: "îmi plac HHHHHHH",
-                        totalOptions: 2
-                    },
-                    mainBranch: "joc_trtrtrt",
-                    optionalBranch: null
-                }
-            ],
+            allQuestions: allQuestions,
             questionSkeleton: {
                 0x01: {
                     condition: "Dacă",
@@ -210,6 +154,7 @@ export default {
             return this.allQuestions.filter(question => question.category == this.category);
         },
         questionCategory() {
+
             return this.questions[this.level].category
         }
     },
@@ -235,6 +180,7 @@ export default {
             this.snackbar_false = true;
         },
         nextQuestion() {
+
             this.snackbar_true = false;
             this.level++;
             document.getElementById('option1').appendChild(
@@ -244,9 +190,10 @@ export default {
                 document.getElementById('card2')
             );
             this.questionCategory = this.questions[this.level].category;
-            
+
         },
         isDescendant(parent, child) {
+
             var node = child.parentNode;
             while (node != null) {
                 if (node == parent) {

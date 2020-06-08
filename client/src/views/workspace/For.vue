@@ -1,11 +1,11 @@
 <template>
     <div class="for">
-        <Workspace />
+        <Workspace category="0x03" />
     </div>
 </template>
 
 <script>
-import Workspace from "@/components/workspace/For";
+import Workspace from "@/components/Workspace";
 
 export default {
     name: "For",

@@ -1,11 +1,11 @@
 <template>
     <div class="advanced">
-        <Workspace />
+        <Workspace category="0x00" />
     </div>
 </template>
 
 <script>
-import Workspace from "@/components/workspace/Advanced";
+import Workspace from "@/components/Workspace";
 
 export default {
     name: "Advanced",

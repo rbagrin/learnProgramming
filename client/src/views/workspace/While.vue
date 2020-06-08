@@ -1,11 +1,11 @@
 <template>
     <div class="while">
-        <Workspace />
+        <Workspace category="0x02" />
     </div>
 </template>
 
 <script>
-import Workspace from "@/components/workspace/While";
+import Workspace from "@/components/Workspace";
 
 export default {
     name: "While",
