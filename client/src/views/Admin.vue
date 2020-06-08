@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import AddUser from "@/components/AddUser";
+import AddUser from "@/components/users/AddUser";
 
 export default {
     name: "Admin",

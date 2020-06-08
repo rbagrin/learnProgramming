@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import FAQform from "@/components/FAQform";
+import FAQform from "@/components/faqs/FAQform";
 
 export default {
     name: "FAQAnswers",

@@ -106,8 +106,8 @@
 </template>
 
 <script>
-import Board from "@/components/Board";
-import Card from "@/components/Card";
+import Board from "@/components/workspace/Board";
+import Card from "@/components/workspace/Card";
 import {
     allQuestions
 } from "@/utils/questions.js";

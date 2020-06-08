@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import RouterCard from "@/components/RouterCard";
+import RouterCard from "@/components/dashboard/RouterCard";
 
 export default {
     name: "Home",
