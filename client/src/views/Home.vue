@@ -12,8 +12,7 @@
             </v-row>
             <v-row>
                 <v-col cols="12" md="4">
-                    <RouterCard title="Pentru" route="/workspace/for" bHeight="250" bColor="#33cc33"
-                        icon="fa-glasses" />
+                    <RouterCard title="Pentru" route="/workspace/for" bHeight="250" bColor="#33cc33" icon="fa-glasses" />
                 </v-col>
                 <v-col cols="12" md="4">
                     <RouterCard title="Cât Timp" route="/workspace/while" bHeight="250" bColor="#661aff"

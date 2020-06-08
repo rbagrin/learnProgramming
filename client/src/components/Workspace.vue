@@ -4,17 +4,32 @@
             <v-col cols="12" md="4" xs="12">
                 <img src="@/assets/ionel-1.png" width="320px" height="550px">
             </v-col>
-            <v-dialog v-model="snackbar_true" max-width="600">
+            <v-dialog v-model="snackbar_award" max-width="600">
                 <v-card>
                     <v-card-title class="headline" style="text-size: 45px">Răspuns Corect!</v-card-title>
                     <v-card-text>
                         <div>
                             <p style="text-size: 35px">Tocmai ai deblocat ceasul de mână!</p>
+                            <img src="@/assets/watch.jpg" width="500px" height="250px">
                         </div>
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="green" text @click="snackbar_true = false">Următoarea întrebare</v-btn>
+                        <v-btn color="green" text @click="nextQuestion()">Următoarea întrebare</v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+            <v-dialog v-model="snackbar_true" max-width="600">
+                <v-card>
+                    <v-card-title class="headline" style="text-size: 45px">Răspuns Corect!</v-card-title>
+                    <v-card-text>
+                        <div>
+                            <p style="text-size: 35px">AAAAAAAAA</p>
+                        </div>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="green" text @click="nextQuestion()">Următoarea întrebare</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
@@ -26,10 +41,6 @@
                             <p style="text-size: 35px">Mai încearcă!</p>
                         </div>
                     </v-card-text>
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn color="green" text @click="snackbar_false = false">Următoarea întrebare</v-btn>
-                    </v-card-actions>
                 </v-card>
             </v-dialog>
             <v-col cols="12" md="7" xs="12">
@@ -38,7 +49,7 @@
 
                         <v-card-text style="font-size: 25px; height: 290px; padding-rig: 10px; padding-top: 15px">
                             <div class="instructions">
-                                <span class="statement">Dacă</span>
+                                <span class="statement">{{questionSkeleton[questionCategory].condition}}</span>
                             </div>
                             <div class="flexbox question" style="background-color: red; margin:0; padding: 0">
                                 <Board id="question">
@@ -47,16 +58,16 @@
                             </div>
                             <br><br>
                             <div class="instructions">
-                                <span class="statement">atunci</span>
+                                <span class="statement">{{questionSkeleton[questionCategory].mainPath}}</span>
                             </div>
                             <div class="instructions">
-                                <span class="instruction">merg_să_mănânc<span style="color: #0F0">()</span></span>
+                                <span class="instruction">{{questions[level].mainBranch}}<span style="color: #0F0">()</span></span>
                             </div>
-                            <div class="instructions">
-                                <span class="statement">altfel</span>
+                            <div class="instructions" v-if="questions[level].optionalBranch">
+                                <span class="statement">{{questionSkeleton[questionCategory].optionalPath}}</span>
                             </div>
-                            <div class="instructions">
-                                <span class="instruction">merg_la_joacă<span style="color: #0F0">()</span></span>
+                            <div class="instructions" v-if="questions[level].optionalBranch">
+                                <span class="instruction">{{questions[level].optionalBranch}}<span style="color: #0F0">()</span></span>
                             </div>
                         </v-card-text>
 
@@ -73,15 +84,15 @@
                 <v-row id="options" justify="space-between">
                     <v-col id="option1box" class="flexbox options">
                         <Board id="option1">
-                            <Card id="card-a" draggable="true">
-                                <p>îmi e foame</p>
+                            <Card id="card1" draggable="true">
+                                <p>{{questions[level].options[1]}}</p>
                             </Card>
                         </Board>
                     </v-col>
                     <v-col id="option2box" class="flexbox options">
                         <Board id="option2">
-                            <Card id="card-b" draggable="true">
-                                <p>îmi e sete</p>
+                            <Card id="card2" draggable="true">
+                                <p>{{questions[level].options[2]}}</p>
                             </Card>
                         </Board>
                     </v-col>
@@ -97,6 +108,7 @@ import Board from "@/components/Board";
 import Card from "@/components/Card";
 
 export default {
+    props: ['category'],
     data() {
         return {
             dialog: false,
@@ -104,18 +116,135 @@ export default {
             snackbarErr: false,
             loading: false,
             snackbar_true: false,
-            snackbar_false: false
+            snackbar_false: false,
+            snackbar_award: false,
+
+            level: 0, // TODO: Last question user accessed
+            allQuestions: [
+                {
+                    category: 0x01, // if
+                    level: 1,
+                    correctAnswer: 1,
+                    options: {
+                        1: "îmi place fotbalul",
+                        2: "îmi plac jocurile",
+                        totalOptions: 2
+                    },
+                    mainBranch: "joc_fotbal",
+                    optionalBranch: "joc_minecraft"
+                },
+                {
+                    category: 0x01, // if
+                    level: 2,
+                    correctAnswer: 2,
+                    options: {
+                        1: "îmi place AAAA",
+                        2: "îmi plac BBBB",
+                        totalOptions: 2
+                    },
+                    mainBranch: "joc_asdsadsa",
+                    optionalBranch: "joc_adsadsad"
+                },
+                {
+                    category: 0x01, // if
+                    level: 3,
+                    correctAnswer: 2,
+                    options: {
+                        1: "îmi place CCCCC",
+                        2: "îmi plac DDDDDD",
+                        totalOptions: 2
+                    },
+                    mainBranch: "joc_zxzxzx",
+                    optionalBranch: null
+                },
+                {
+                    category: 0x02, // while
+                    level: 4,
+                    correctAnswer: 2,
+                    options: {
+                        1: "îmi place EEEEEE",
+                        2: "îmi plac FFFFFFF",
+                        totalOptions: 2
+                    },
+                    mainBranch: "joc_gfghgffg",
+                    optionalBranch: null
+                },
+                {
+                    category: 0x03, // for
+                    level: 5,
+                    correctAnswer: 2,
+                    options: {
+                        1: "îmi place GGGGGGGGG",
+                        2: "îmi plac HHHHHHH",
+                        totalOptions: 2
+                    },
+                    mainBranch: "joc_trtrtrt",
+                    optionalBranch: null
+                }
+            ],
+            questionSkeleton: {
+                0x01: {
+                    condition: "Dacă",
+                    mainPath: "atunci",
+                    optionalPath: "altfel"
+                },
+                0x02: {
+                    condition: "Cât timp",
+                    mainPath: "execută",
+                    optionalPath: null
+                },
+                0x03: {
+                    condition: "Pentru",
+                    mainPath: "repetă",
+                    optionalPath: null
+                }
+            }
         };
+    },
+    computed: {
+        questions() {
+
+            if (this.category == 0x00) {
+                return this.allQuestions;
+            }
+            return this.allQuestions.filter(question => question.category == this.category);
+        },
+        questionCategory() {
+            return this.questions[this.level].category
+        }
     },
     methods: {
         check_answer() {
 
-            if (this.isDescendant(document.getElementById("question"), document.getElementById("card-a"))) {
+            if (
+                this.isDescendant(document.getElementById("question"), document.getElementById("card1")) &&
+                this.questions[this.level].correctAnswer === 1
+            ) {
                 this.snackbar_true = true;
-            } else {
-                this.snackbar_false = true;
+                return;
             }
 
+            if (
+                this.isDescendant(document.getElementById("question"), document.getElementById("card2")) &&
+                this.questions[this.level].correctAnswer === 2
+            ) {
+                this.snackbar_true = true;
+                return;
+            }
+
+            this.snackbar_false = true;
+        },
+        nextQuestion() {
+            this.snackbar_true = false;
+            this.level++;
+            document.getElementById('option1').appendChild(
+                document.getElementById('card1')
+            );
+            document.getElementById('option2').appendChild(
+                document.getElementById('card2')
+            );
+            this.questionCategory = this.questions[this.level].category;
+            
         },
         isDescendant(parent, child) {
             var node = child.parentNode;
