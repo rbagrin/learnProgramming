@@ -3,9 +3,11 @@ const jwt = require('jsonwebtoken');
 
 const UsersController = require('../DataProvider/Users/controller.js');
 const FaqsController = require('../DataProvider/Faqs/controller.js');
+const QuestionsController = require('../DataProvider/Questions/controller.js');
 
 Router.use('/users', UsersController);
 Router.use('/faqs', FaqsController);
+Router.use('/questions', QuestionsController);
 
 // Welcome Page
 Router.get('/', (req, res) => {

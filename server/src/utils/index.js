@@ -14,11 +14,11 @@ const validateFields = (fields) => {
         let fieldValue = fields[fieldName].value;
         const fieldType = fields[fieldName].type;
 
-        if (!fieldValue || fieldValue.length === 0) {
+        if ((!fieldValue && fieldValue !== false && fieldValue !== 0x00) || fieldValue.length === 0) {
             throw new ServerError(`Lipseste campul ${fieldName}`, 400);
         }
 
-        fieldValue += ''; // validator functioneaza doar pe strings
+        fieldValue += '';
         switch (fieldType) {
             case 'ascii':
                 if (!validator.isAscii(fieldValue)) {
@@ -45,6 +45,10 @@ const validateFields = (fields) => {
                     throw new ServerError(`Campul ${fieldName} trebuie sa fie email`, 400);
                 }
                 break;
+            case 'bool':
+                if (!validator.isBoolean(fieldValue)) {
+                    throw new ServerError(`Campul ${fieldName} trebuie sa fie boolean`, 400);
+                }
         }
     }
 }

@@ -21,8 +21,10 @@ const db = require('../../.config/db').mongoURI;
 
 const Users = require('./models/Users.js');
 const Faqs = require('./models/Faqs.js');
+const Questions = require('./models/Questions.js');
 
 module.exports = {
     Users,
     Faqs,
+    Questions
 }

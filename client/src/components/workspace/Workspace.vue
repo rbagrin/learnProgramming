@@ -15,7 +15,7 @@
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="green" text @click="nextQuestion()">Următoarea întrebare</v-btn>
+                        <v-btn color="green" text @click="goToAwards()">Mergi la premii</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
@@ -108,9 +108,6 @@
 <script>
 import Board from "@/components/workspace/Board";
 import Card from "@/components/workspace/Card";
-import {
-    allQuestions
-} from "@/utils/questions.js";
 
 export default {
     props: ['category'],
@@ -123,9 +120,10 @@ export default {
             snackbar_true: false,
             snackbar_false: false,
             snackbar_award: false,
+            nextQuestionExists: true,
 
             level: 0, // TODO: Last question user accessed
-            allQuestions: allQuestions,
+            
             questionSkeleton: {
                 0x01: {
                     condition: "Dacă",
@@ -146,9 +144,12 @@ export default {
         };
     },
     computed: {
+        allQuestions() {
+            return this.$store.getters.questions;
+        },
         questions() {
 
-            if (this.category == 0x00) {
+            if (this.category === "0x00") {
                 return this.allQuestions;
             }
             return this.allQuestions.filter(question => question.category == this.category);
@@ -161,22 +162,52 @@ export default {
     methods: {
         check_answer() {
 
+            let isCorrectAnswer = false;
             if (
                 this.isDescendant(document.getElementById("question"), document.getElementById("card1")) &&
                 this.questions[this.level].correctAnswer === 1
             ) {
-                this.snackbar_true = true;
-                return;
+                isCorrectAnswer = true;
             }
 
             if (
                 this.isDescendant(document.getElementById("question"), document.getElementById("card2")) &&
                 this.questions[this.level].correctAnswer === 2
             ) {
+                isCorrectAnswer = true;
+            }
+
+            if (isCorrectAnswer) {
+
+                // if this is the last question show the award dialog and unlock the award
+                if (this.questions.length - 1 === this.level) {
+
+                    this.snackbar_award = true;
+                    switch(parseInt(this.category)) {
+                        case 0x00: 
+                            this.$store.dispatch('ENABLE_ADVANCED_AWARD');
+                            break;
+                        case 0x01:
+                            this.$store.dispatch('ENABLE_IF_AWARD');
+                            break;
+                        case 0x02:
+                            this.$store.dispatch('ENABLE_WHILE_AWARD');
+                            break;
+                        case 0x03:
+                            this.$store.dispatch('ENABLE_FOR_AWARD');
+                            break;
+                        default:
+
+                    }
+                    return;
+                }
+
+                // if this is not the last question then show the right answer dialog
                 this.snackbar_true = true;
                 return;
             }
 
+            // if wrong answer show try again dialog
             this.snackbar_false = true;
         },
         nextQuestion() {
@@ -191,6 +222,10 @@ export default {
             );
             this.questionCategory = this.questions[this.level].category;
 
+        },
+        goToAwards() {
+            this.snackbar_award = false;
+            this.$router.push("/awards");
         },
         isDescendant(parent, child) {
 

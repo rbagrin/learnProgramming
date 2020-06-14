@@ -8,9 +8,14 @@ export default {
     state: {
         token: localStorage.getItem('access-token') || null,
         user: null,
+        user_id: localStorage.getItem('user_id') || null,
         user_name: localStorage.getItem('user_name') || null,
         user_email: localStorage.getItem('user_email') || null,
         user_role: localStorage.getItem('user_role') || null,
+        if_award: localStorage.getItem('if-award') || null,
+        for_award: localStorage.getItem('for-award') || null,
+        while_award: localStorage.getItem('while-award') || null,
+        advanced_award: localStorage.getItem('advanced-award') || null,
         users: null
     },
 
@@ -20,6 +25,9 @@ export default {
         },
         users(state) {
             return state.users;
+        },
+        user_id(state) {
+            return state.user_id;
         },
         user_name(state) {
             return state.user_name;
@@ -32,6 +40,18 @@ export default {
         },
         user(state) {
             return state.user;
+        },
+        if_award(state) {
+            return state.if_award;
+        },
+        for_award(state) {
+            return state.for_award;
+        },
+        while_award(state) {
+            return state.while_award;
+        },
+        advanced_award(state) {
+            return state.advanced_award;
         }
     },
 
@@ -44,6 +64,11 @@ export default {
         setToken(state, token) {
             state.token = token;
             localStorage.setItem('access-token', token);
+        },
+
+        setUserId(state, id) {
+            state.user_id = id;
+            localStorage.setItem("user_id", id);
         },
 
         setUserName(state, name) {
@@ -64,6 +89,26 @@ export default {
         setUser(state, user) {
             state.user = user;
             localStorage.setItem("user", user);
+        },
+        setIfAward(state, award) {
+            const awardState = String(award) === "true";
+            state.if_award = awardState;
+            localStorage.setItem('if-award', awardState);
+        },
+        setForAward(state, award) {
+            const awardState = String(award) === "true";
+            state.for_award = awardState;
+            localStorage.setItem('for-award', awardState);
+        },
+        setWhileAward(state, award) {
+            const awardState = String(award) === "true";
+            state.while_award = awardState;
+            localStorage.setItem('while-award', awardState);
+        },
+        setAdvancedAward(state, award) {
+            const awardState = String(award) === "true";
+            state.advanced_award = awardState;
+            localStorage.setItem('advanced-award', awardState);
         },
         updateUsers: (state, users) => (state.users = users),
     },
@@ -87,11 +132,17 @@ export default {
             .then(res => {
 
                 if (res.success) {
+
                     commit('setToken', res.token);
                     commit('setUser', res.user);
+                    commit('setUserId', res.user.id);
                     commit('setUserName', res.user.name);
                     commit('setUserEmail', res.user.email);
                     commit('setUserRole', res.user.user_role);
+                    commit('setIfAward', false); // TODO: Get these from backend
+                    commit('setForAward', false);
+                    commit('setWhileAward', false);
+                    commit('setAdvancedAward', false);
                 }
                 return res.success;
             })
@@ -107,18 +158,28 @@ export default {
         }) {
             commit('setToken', localStorage.getItem('access-token'));
             commit('setUser', localStorage.getItem('user'));
+            commit('setUserId', localStorage.getItem('user_id'));
             commit('setUserName', localStorage.getItem('user_name'));
             commit('setUserEmail', localStorage.getItem('user_email'));
             commit('setUserRole', localStorage.getItem('user_role'));
+            commit('setIfAward', localStorage.getItem('if-award'));
+            commit('setForAward', localStorage.getItem('for-award'));
+            commit('setWhileAward', localStorage.getItem('while-award'));
+            commit('setAdvancedAward', localStorage.getItem('advanced-award'));
         },
 
         LOGOUT({
             commit
         }) {
             localStorage.removeItem('access-token');
+            localStorage.removeItem('user_id');
             localStorage.removeItem('user_name');
             localStorage.removeItem('user_email');
             localStorage.removeItem('user_role');
+            localStorage.removeItem('if-award');
+            localStorage.removeItem('for-award');
+            localStorage.removeItem('while-award');
+            localStorage.removeItem('advanced-award');
             localStorage.removeItem('user');
             commit('setUser', null);
             commit('logout');
@@ -140,6 +201,136 @@ export default {
                 },
                 body: JSON.stringify(payload)
             })
+        },
+
+        ENABLE_IF_AWARD({
+            commit
+        }) {
+            commit('setIfAward', true);
+            return fetch(USERS_URL + localStorage.getItem('user_id') + "/awards", {
+                method: "PUT",
+                mode: "cors",
+                cache: "no-cache",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": 'Bearer ' + localStorage.getItem('access-token')
+                },
+                body: JSON.stringify({
+                    awards: {
+                        watch: true,
+                        glasses: localStorage.getItem('for-award') === "true",
+                        hat: localStorage.getItem('while-award') === "true",
+                        tshirt: localStorage.getItem('advanced-award') === "true"
+                    }
+                })
+            })
+            .then(res => res.json())
+            .then(res => {
+
+                return res.success;
+            })
+            .catch(err => {
+
+                console.log(err);
+                return false;
+            })
+        },
+        ENABLE_FOR_AWARD({
+            commit
+        }) {
+            commit('setForAward', true);
+            return fetch(USERS_URL + localStorage.getItem('user_id') + "/awards", {
+                method: "PUT",
+                mode: "cors",
+                cache: "no-cache",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": 'Bearer ' + localStorage.getItem('access-token')
+                },
+                body: JSON.stringify({
+                    awards: {
+                        watch: localStorage.getItem('if-award') === "true",
+                        glasses: true,
+                        hat: localStorage.getItem('while-award') === "true",
+                        tshirt: localStorage.getItem('advanced-award') === "true"
+                    }
+                })
+            })
+            .then(res => res.json())
+            .then(res => {
+
+                return res.success;
+            })
+            .catch(err => {
+
+                console.log(err);
+                return false;
+            })
+        },
+        ENABLE_WHILE_AWARD({
+            commit
+        }) {
+            commit('setWhileAward', true);
+            return fetch(USERS_URL + localStorage.getItem('user_id') + "/awards", {
+                method: "PUT",
+                mode: "cors",
+                cache: "no-cache",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": 'Bearer ' + localStorage.getItem('access-token')
+                },
+                body: JSON.stringify({
+                    awards: {
+                        watch: localStorage.getItem('if-award') === "true",
+                        glasses: localStorage.getItem('for-award') === "true",
+                        hat: true,
+                        tshirt: localStorage.getItem('advanced-award') === "true"
+                    }
+                })
+            })
+            .then(res => res.json())
+            .then(res => {
+
+                return res.success;
+            })
+            .catch(err => {
+
+                console.log(err);
+                return false;
+            })
+        },
+        ENABLE_ADVANCED_AWARD({
+            commit
+        }) {
+            commit('setAdvancedAward', true);
+            return fetch(USERS_URL + localStorage.getItem('user_id') + "/awards", {
+                method: "PUT",
+                mode: "cors",
+                cache: "no-cache",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": 'Bearer ' + localStorage.getItem('access-token')
+                },
+                body: JSON.stringify({
+                    awards: {
+                        watch: localStorage.getItem('if-award') === "true",
+                        glasses: localStorage.getItem('for-award') === "true",
+                        hat: localStorage.getItem('while-award') === "true",
+                        tshirt: true
+                    }
+                })
+            })
+            .then(res => res.json())
+            .then(res => {
+
+                return res.success;
+            })
+            .catch(err => {
+
+                console.log(err);
+                return false;
+            })
+
         },
 
         getUsersFromDB({

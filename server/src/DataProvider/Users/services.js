@@ -19,7 +19,13 @@ const add = async (name, email, password, role) => {
         name: name,
         email: email,
         password: hashPass,
-        role: role
+        role: role,
+        awards: {
+            watch: false,
+            glasses: false,
+            hat: false,
+            tshirt: false
+        }
     });
     await user.save();
 };
@@ -41,6 +47,15 @@ const updateById = async (id, name, email, password) => {
             "name": name,
             "email": email,
             "password": hashPass
+        }
+    });
+};
+
+const updateAwardsById = async (id, awards) => {
+
+    await Users.findByIdAndUpdate(id, {
+        $set: {
+            "awards": awards
         }
     });
 };
@@ -81,6 +96,7 @@ const logIn = async (username, password) => {
 
         return {
             token: generateToken(payload),
+            id: user._id,
             name: user.name,
             email: user.email,
             user_role: user.role
@@ -117,6 +133,7 @@ module.exports = {
     getAll,
     getById,
     updateById,
+    updateAwardsById,
     deleteById,
     logIn,
     register

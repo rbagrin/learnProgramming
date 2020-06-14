@@ -151,6 +151,46 @@ router.put('/:id', authorizeAndExtractToken, authorizeRoles(adminRole), async (r
     }
 });
 
+router.put('/:id/awards', authorizeAndExtractToken, async (req, res, next) => {
+
+    const id = req.params.id;
+    const {watch, glasses, hat, tshirt} = req.body.awards;
+
+    try {
+
+        const fieldsToBeValidated = {
+            watch: {
+                value: watch,
+                type: 'bool'
+            },
+            glasses: {
+                value: glasses,
+                type: 'bool'
+            },
+            hat: {
+                value: hat,
+                type: 'bool'
+            },
+            tshirt: {
+                value: tshirt,
+                type: 'bool'
+            }
+        };
+
+        validateFields(fieldsToBeValidated);
+
+        await UsersService.updateAwardsById(id, {watch, glasses, hat, tshirt});
+
+        res.json({
+            success: true,
+            message: 'User awards successfully updated!'
+        });
+
+    } catch (err) {
+        next(err);
+    }
+});
+
 router.delete('/:id', authorizeAndExtractToken, authorizeRoles(adminRole), async (req, res, next) => {
 
     const id = req.params.id;
@@ -205,6 +245,7 @@ router.post('/login', async (req, res, next) => {
             user: {
                 name: result.name,
                 email: result.email,
+                id: result.id,
                 user_role: ROLES_MAPPING[result.user_role]
             }
         });

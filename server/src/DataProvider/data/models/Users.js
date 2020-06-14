@@ -16,6 +16,24 @@ const userSchema = new mongoose.Schema({
     role: {
         type: Number,
         required: [true, 'User role is required']
+    },
+    awards: {
+        watch: {
+            type: Boolean,
+            required: true
+        },
+        glasses: {
+            type: Boolean,
+            required: true
+        },
+        hat: {
+            type: Boolean,
+            required: true
+        },
+        tshirt: {
+            type: Boolean,
+            required: true
+        }
     }
 });
 

@@ -89,6 +89,7 @@ export default {
                 if (!added) {
                     alert("Something wrong happened!");
                 }
+                this.$refs.form.reset();
             } catch (err) {
                 console.log(err);
             }
