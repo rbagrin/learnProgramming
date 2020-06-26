@@ -4,13 +4,21 @@
             <v-col cols="12" md="4" xs="12">
                 <img src="@/assets/ionel-1.png" width="310px" height="520px">
             </v-col>
-            <v-dialog v-model="snackbar_award" max-width="600">
+            <v-dialog v-model="snackbar_award" max-width="1100">
                 <v-card>
                     <v-card-title class="headline" style="text-size: 45px">Răspuns Corect!</v-card-title>
                     <v-card-text>
+                        <v-row justify="space-around" align="center" style="margin: 0; padding: 0">
+                            <v-col cols="12" md="6">
+                                <code>{{ifDefinition}}</code>
+                            </v-col>
+                            <v-col cols="12" md="6">
+                                <p style="text-size: 35px">Tocmai ai deblocat ceasul de mână!</p>
+                                <img src="@/assets/watch.jpg" width="500px" height="250px">
+                            </v-col>
+                        </v-row>
                         <div>
-                            <p style="text-size: 35px">Tocmai ai deblocat ceasul de mână!</p>
-                            <img src="@/assets/watch.jpg" width="500px" height="250px">
+                            
                         </div>
                     </v-card-text>
                     <v-card-actions>
@@ -46,8 +54,9 @@
             <v-col cols="12" md="7" xs="12">
                 <v-row>
                     <v-card color="#004D40" width=100% height="350px" align="center" outlined>
-
+                        
                         <v-card-text style="font-size: 25px; height: 290px; padding-rig: 10px; padding-top: 15px">
+
                             <div class="instructions">
                                 <span class="statement">{{questionSkeleton[questionCategory].condition}}</span>
                             </div>
@@ -108,6 +117,7 @@
 <script>
 import Board from "@/components/workspace/Board";
 import Card from "@/components/workspace/Card";
+import {DEFINITIONS} from "@/utils/constants.js";
 
 export default {
     props: ['category'],
@@ -121,6 +131,7 @@ export default {
             snackbar_false: false,
             snackbar_award: false,
             nextQuestionExists: true,
+            ifDefinition: DEFINITIONS.IF,
 
             level: 0, // TODO: Last question user accessed
             
@@ -313,6 +324,14 @@ p {
 .instructions {
     padding-bottom: 17px;
     margin-bottom: 5px;
+}
+
+code {
+  font-family: Consolas,"courier new";
+  color: rgb(11, 214, 45);
+  background-color: #170124;
+  padding: 2px;
+  font-size: 105%;
 }
 
 </style>

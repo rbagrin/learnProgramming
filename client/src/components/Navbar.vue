@@ -88,12 +88,12 @@ export default {
             return [
                 {
                     icon: "fa-sign-in-alt",
-                    text: "Log in",
+                    text: "Intră în cont",
                     route: "/login"
                 },
                 {
                     icon: "fa-user-plus",
-                    text: "Register",
+                    text: "Înregistrare",
                     route: "/register"
                 }
             ];

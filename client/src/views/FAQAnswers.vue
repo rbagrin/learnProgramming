@@ -1,6 +1,6 @@
 <template>
     <v-container class="faq my-5">
-        <h1 style="color: #fff">Frequently Asked Questions - Support</h1>
+        <h1 style="color: #fff">Întrebări frecvente - Support</h1>
 
 
         <v-card dark color="#00695C" class="mx-0 px-2">
@@ -13,9 +13,9 @@
             ></v-select> -->
 
                 <v-radio-group v-model="questionSelect" row>
-                    <v-radio class="mx-6" label="All questions" value="All questions"></v-radio>
-                    <v-radio class="mx-6" label="Unanswered questions" value="Unanswered questions"></v-radio>
-                    <v-radio class="mx-6" label="Important questions" value="Important questions"></v-radio>
+                    <v-radio class="mx-6" label="Toate " value="All questions"></v-radio>
+                    <v-radio class="mx-6" label="Fără răspuns" value="Unanswered questions"></v-radio>
+                    <v-radio class="mx-6" label="Importante" value="Important questions"></v-radio>
                 </v-radio-group>
 
                 <v-spacer></v-spacer>
@@ -29,11 +29,11 @@
             <v-expansion-panel v-for="faq in questionSelectArray" :key="faq.id">
                 <v-expansion-panel-header>{{ faq.question }}</v-expansion-panel-header>
                 <v-expansion-panel-content height="200px">
-                    <v-textarea class="mx-2" v-model="answer" label="Answer the question" rows="1"
+                    <v-textarea class="mx-2" v-model="answer" label="Răspunde întrebării" rows="1"
                         prepend-icon="comment" auto-grow></v-textarea>
                     <v-row class="mx-0" justify="space-between">
                         <v-col cols=12 md="3" align="end" justify="end">
-                            <v-checkbox v-model="important" label="Mark as important" color="#4DB6AC" hide-details>
+                            <v-checkbox v-model="important" label="Adaugă în importante" color="#4DB6AC" hide-details>
                             </v-checkbox>
                         </v-col>
                         <v-col cols=12 md="2" align="end">

@@ -4,17 +4,17 @@
             <template v-slot:activator="{ on }">
                 <v-btn color="#4DB6AC" dark v-on="on">
                     <v-icon left>add</v-icon>
-                    <span>Question</span>
+                    <span>Întrebare</span>
                 </v-btn>
             </template>
 
             <v-card>
                 <v-card-title class="headline grey lighten-2" primary-title>
-                    Add new question:
+                    Ai o întrebare?
                 </v-card-title>
 
                 <v-card-text>
-                    <v-textarea class="mx-2" v-model="question" label="Ask your question" rows="1"
+                    <v-textarea class="mx-2" v-model="question" label="Întreabă-ne orice" rows="1"
                         prepend-icon="comment"></v-textarea>
                 </v-card-text>
 
@@ -23,14 +23,14 @@
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn color="primary" text @click="submit" :loading="loading" :disabled="loading">
-                        Submit
+                        Trimite
                     </v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
 
         <v-snackbar v-model="snackbar" top color="success" :timeout="3000">
-            <span>Question successfully addded. Wait for a response.</span>
+            <span>Întrebare adresată cu succes. Un membru de la support vă va răspunde în cel mai scurt timp.</span>
             <v-btn color="white" text @click="snackbar = false">
                 <v-icon>close</v-icon>
             </v-btn>

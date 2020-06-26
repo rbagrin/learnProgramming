@@ -9,7 +9,7 @@
 
             <v-card>
                 <v-card-title class="headline grey lighten-2" primary-title>
-                    Add Question
+                    Adaugă întrebare quiz
                 </v-card-title>
 
                 <v-card-text>

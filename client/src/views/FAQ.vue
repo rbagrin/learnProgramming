@@ -7,7 +7,7 @@
                 <v-row v-if="true" class="justify-start mx-0">
                     <v-btn color="#4DB6AC" :hidden="isUser" router to="/faq/answers">
                         <v-icon left>question_answer</v-icon>
-                        <span>All questions</span>
+                        <span>Toate întrebările</span>
                     </v-btn>
                 </v-row>
                 <v-spacer></v-spacer>

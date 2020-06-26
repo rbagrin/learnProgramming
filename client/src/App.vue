@@ -20,7 +20,12 @@ export default {
     },
     data: () => ({
 
-    })
+    }),
+    created() {
+        this.$store.dispatch('getUsersFromDB');
+        this.$store.dispatch('getQuestionsFromDB');
+        this.$store.dispatch('getFaqsFromDB');
+    },
 };
 </script>
 

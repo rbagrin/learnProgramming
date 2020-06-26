@@ -9,9 +9,9 @@
                     <v-alert color="error" :value="error">The username or the password are incorrect!</v-alert>
                     <v-card-text>
                         <v-form class="px-10" ref="form">
-                            <v-text-field label="Username or e-mail" v-model="username" prepend-icon="account_circle"
+                            <v-text-field label="Username sau e-mail" v-model="username" prepend-icon="account_circle"
                                 :rules="inputRules"></v-text-field>
-                            <v-text-field label="Password" v-model="password" :rules="passwordRules"
+                            <v-text-field label="Parolă" v-model="password" :rules="passwordRules"
                                 :type="showPassword ? 'text' : 'password'"
                                 :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'" hint="At least 8 characters"
                                 prepend-icon="fingerprint" counter @click:append="showPassword = !showPassword"
@@ -27,7 +27,7 @@
                         </v-form>
                     </v-card-text>
                     <v-container>
-                        Don't have an account? <a href="register">Register here!</a>
+                        Nu ai cont? <a href="register">Înregistrează-te aici!</a>
                     </v-container>
                 </v-card>
             </v-flex>

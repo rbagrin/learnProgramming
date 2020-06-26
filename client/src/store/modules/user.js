@@ -113,7 +113,6 @@ export default {
         updateUsers: (state, users) => (state.users = users),
     },
 
-
     actions: {
         LOGIN: ({
             commit
