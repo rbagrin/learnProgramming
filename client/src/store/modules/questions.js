@@ -33,7 +33,7 @@ export default {
             .then(res => {
 
                 if (res.success) {
-                    console.log(res.questions.length)
+
                     commit("updateQuestions", res.questions);
                     return res.questions;
                 }

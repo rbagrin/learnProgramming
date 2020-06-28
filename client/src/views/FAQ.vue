@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import FAQform from "@/components/faqs/FAQform";
+import FAQform from "../components/faqs/FAQform";
 
 export default {
     name: "FAQ",

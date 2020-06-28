@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import GDPRForm from '@/components/GDPRForm';
+import GDPRForm from '../components/GDPRForm';
 
 export default {
     name: "Register",

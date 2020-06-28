@@ -1,6 +1,6 @@
 module.exports = {
     transpileDependencies: ["vuetify"],
-    publicPath: "",
+    publicPath: "/",
     chainWebpack: config => {
         config
             .plugin("html")

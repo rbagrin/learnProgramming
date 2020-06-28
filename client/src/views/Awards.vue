@@ -71,7 +71,7 @@
             <v-expand-transition>
                 <v-sheet v-if="model != null" color="grey lighten-4" height="200" tile>
                     <v-row class="fill-height" align="center" justify="center">
-                        <img src="@/assets/watch.jpg" width="400px" height="200px">
+                        <img src="../assets/watch.jpg" width="400px" height="200px">
                     </v-row>
                 </v-sheet>
             </v-expand-transition>

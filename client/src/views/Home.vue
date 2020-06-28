@@ -41,10 +41,15 @@
 </template>
 
 <script>
-import RouterCard from "@/components/dashboard/RouterCard";
+import RouterCard from "../components/dashboard/RouterCard";
 
 export default {
     name: "Home",
-    components: {RouterCard}
+    components: {RouterCard},
+    created() {
+        this.$store.dispatch('getUsersFromDB');
+        this.$store.dispatch('getQuestionsFromDB');
+        this.$store.dispatch('getFaqsFromDB');
+    }
 };
 </script>

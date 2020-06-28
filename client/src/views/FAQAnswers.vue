@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import FAQform from "@/components/faqs/FAQform";
+import FAQform from "../components/faqs/FAQform";
 
 export default {
     name: "FAQAnswers",
@@ -85,7 +85,6 @@ export default {
     methods: {
         async reply(faq) {
             this.loadingReplyButton = true;
-
             const questionId = faq._id;
             let data = {
                 question: faq.question,
@@ -103,7 +102,7 @@ export default {
                     questionId,
                     data
                 });
-                console.log("Updated = ", updated)
+                
                 if (!updated) {
                     alert("Something wrong happened!");
                 }

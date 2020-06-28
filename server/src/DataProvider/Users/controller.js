@@ -26,7 +26,7 @@ const ROLES_MAPPING = {
 
 const router = express.Router();
 
-router.get('/', authorizeAndExtractToken, authorizeRoles(adminRole), async (req, res, next) => {
+router.get('/', authorizeAndExtractToken, authorizeRoles(adminRole, supportRole), async (req, res, next) => {
 
     try {
 

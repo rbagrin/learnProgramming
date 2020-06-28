@@ -2,7 +2,7 @@
     <v-container fill-height grid-list-md text-xs-center class="container">
         <v-row justify="space-around" align="center" style="margin: 0; padding: 0">
             <v-col cols="12" md="4" xs="12">
-                <img src="@/assets/ionel-1.png" width="310px" height="520px">
+                <img src="../../assets/ionel-1.png" width="310px" height="520px">
             </v-col>
             <v-dialog v-model="snackbar_award" max-width="1100">
                 <v-card>
@@ -14,7 +14,7 @@
                             </v-col>
                             <v-col cols="12" md="6">
                                 <p style="text-size: 35px">Tocmai ai deblocat ceasul de mână!</p>
-                                <img src="@/assets/watch.jpg" width="500px" height="250px">
+                                <img src="../../assets/watch.jpg" width="500px" height="250px">
                             </v-col>
                         </v-row>
                         <div>
@@ -115,12 +115,15 @@
 </template>
 
 <script>
-import Board from "@/components/workspace/Board";
-import Card from "@/components/workspace/Card";
-import {DEFINITIONS} from "@/utils/constants.js";
+import Board from "./Board";
+import Card from "./Card";
+import {DEFINITIONS} from "../../utils/constants.js";
 
 export default {
     props: ['category'],
+    beforeMount() {
+        this.$store.dispatch('getQuestionsFromDB');
+    },
     data() {
         return {
             dialog: false,

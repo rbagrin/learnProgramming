@@ -25,7 +25,7 @@
           },
         {
             icon: 'mdi-linkedin',
-            route: 'https://www.linkedin.com'
+            route: 'https://www.linkedin.com/in/radu-bagrin-6562ba14a/'
         },
         {
             icon: 'mdi-instagram',

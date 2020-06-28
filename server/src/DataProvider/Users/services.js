@@ -122,7 +122,13 @@ const register = async (name, email, password, role) => {
         name: name,
         email: email,
         password: hashPass,
-        role: role
+        role: role,
+        awards: {
+            watch: false,
+            glasses: false,
+            hat: false,
+            tshirt: false
+        }
     });
 
     await newUser.save();

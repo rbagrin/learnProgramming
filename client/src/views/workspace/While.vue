@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Workspace from "@/components/workspace/Workspace";
+import Workspace from "../../components/workspace/Workspace";
 
 export default {
     name: "While",

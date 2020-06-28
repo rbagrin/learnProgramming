@@ -80,8 +80,8 @@
 </template>
 
 <script>
-import AddUser from "@/components/users/AddUser";
-import AddQuestion from "@/components/questions/AddQuestion";
+import AddUser from "../components/users/AddUser";
+import AddQuestion from "../components/questions/AddQuestion";
 
 export default {
     name: "Admin",
