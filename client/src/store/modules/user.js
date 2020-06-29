@@ -138,10 +138,10 @@ export default {
                     commit('setUserName', res.user.name);
                     commit('setUserEmail', res.user.email);
                     commit('setUserRole', res.user.user_role);
-                    commit('setIfAward', false); // TODO: Get these from backend
-                    commit('setForAward', false);
-                    commit('setWhileAward', false);
-                    commit('setAdvancedAward', false);
+                    commit('setIfAward', res.user.awards.watch); // TODO: Get these from backend
+                    commit('setForAward', res.user.awards.glasses);
+                    commit('setWhileAward', res.user.awards.hat);
+                    commit('setAdvancedAward', res.user.awards.tshirt);
                 }
                 return res.success;
             })

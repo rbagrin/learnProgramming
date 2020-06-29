@@ -99,7 +99,8 @@ const logIn = async (username, password) => {
             id: user._id,
             name: user.name,
             email: user.email,
-            user_role: user.role
+            user_role: user.role,
+            awards: user.awards
         };
     }
 };

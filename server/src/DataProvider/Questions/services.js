@@ -1,6 +1,6 @@
 const Questions = require("../data").Questions;
 
-const add = async (category, option1, option2, correctAnswer, mainBranch, optionalBranch) => {
+const add = async (category, option1, option2, correctAnswer, mainBranch, optionalBranch, message) => {
 
     let level = 0;
     await Questions.find({category: category})
@@ -22,7 +22,8 @@ const add = async (category, option1, option2, correctAnswer, mainBranch, option
                 level: level,
                 correctAnswer: correctAnswer,
                 mainBranch: mainBranch,
-                optionalBranch: optionalBranch
+                optionalBranch: optionalBranch,
+                message: message
             });
 
             await question.save();
@@ -37,7 +38,7 @@ const getById = async (id) => {
     return await Questions.findById(id);
 };
 
-const updateById = async (id, category, option1, option2, correctAnswer, mainBranch, optionalBranch) => {
+const updateById = async (id, category, option1, option2, correctAnswer, mainBranch, optionalBranch, message) => {
     await Questions.findByIdAndUpdate(id, {
         $set: {
             'category': category,
@@ -45,7 +46,8 @@ const updateById = async (id, category, option1, option2, correctAnswer, mainBra
             'option2': option2,
             'correctAnswer': correctAnswer,
             'mainBranch': mainBranch,
-            'optionalBranch': optionalBranch
+            'optionalBranch': optionalBranch,
+            'message': message
         }
     });
 };

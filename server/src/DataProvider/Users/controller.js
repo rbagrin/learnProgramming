@@ -246,7 +246,8 @@ router.post('/login', async (req, res, next) => {
                 name: result.name,
                 email: result.email,
                 id: result.id,
-                user_role: ROLES_MAPPING[result.user_role]
+                user_role: ROLES_MAPPING[result.user_role],
+                awards: result.awards
             }
         });
 

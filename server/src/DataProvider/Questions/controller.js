@@ -56,6 +56,9 @@ router.post('/', authorizeAndExtractToken, authorizeRoles(adminRole), async (req
     const correctAnswer = req.body.correctAnswer;
     const mainBranch = req.body.mainBranch;
     const optionalBranch = req.body.optionalBranch ? req.body.optionalBranch : null;
+    const message = req.body.message ? req.body.message : "Bravo!";
+
+    console.log(message)
 
     try {
 
@@ -79,6 +82,10 @@ router.post('/', authorizeAndExtractToken, authorizeRoles(adminRole), async (req
             mainBranch: {
                 value: mainBranch,
                 type: 'ascii'
+            },
+            message: {
+                value: message,
+                type: 'ascii'
             }
         };
 
@@ -91,7 +98,7 @@ router.post('/', authorizeAndExtractToken, authorizeRoles(adminRole), async (req
 
         validateFields(fieldsToBeValidated);
 
-        await QuestionsService.add(category, option1, option2, correctAnswer, mainBranch, optionalBranch);
+        await QuestionsService.add(category, option1, option2, correctAnswer, mainBranch, optionalBranch, message);
 
         res.json({
             success: true,

@@ -34,6 +34,10 @@ const questionsSchema = new mongoose.Schema({
     level: {
         type: Number,
         required: true
+    },
+    message: {
+        type: String,
+        required: false
     }
 });
 

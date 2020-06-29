@@ -13,8 +13,11 @@
                                 <code>{{ifDefinition}}</code>
                             </v-col>
                             <v-col cols="12" md="6">
-                                <p style="text-size: 35px">Tocmai ai deblocat ceasul de mână!</p>
+                                <div>
+                                    <p style="text-size: 35px">{{questions[level].message}}</p>
+                                </div>
                                 <img src="../../assets/watch.jpg" width="500px" height="250px">
+                                <p style="text-size: 35px">Tocmai ai deblocat ceasul de mână!</p>
                             </v-col>
                         </v-row>
                         <div>
@@ -32,7 +35,7 @@
                     <v-card-title class="headline" style="text-size: 45px">Răspuns Corect!</v-card-title>
                     <v-card-text>
                         <div>
-                            <p style="text-size: 35px">AAAAAAAAA</p>
+                            <p style="text-size: 35px">{{questions[level].message}}</p>
                         </div>
                     </v-card-text>
                     <v-card-actions>
