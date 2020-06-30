@@ -69,9 +69,30 @@
             </v-slide-group>
 
             <v-expand-transition>
-                <v-sheet v-if="model != null" color="grey lighten-4" height="200" tile>
+                <v-sheet v-if="model == 0" color="grey lighten-4" height="200" tile>
                     <v-row class="fill-height" align="center" justify="center">
-                        <img src="../assets/watch.jpg" width="400px" height="200px">
+                        <img src="../assets/watch.jpg" alt="watch.jpg" width="400px" height="200px">
+                    </v-row>
+                </v-sheet>
+            </v-expand-transition>
+            <v-expand-transition>
+                <v-sheet v-if="model == 1" color="grey lighten-4" height="200" tile>
+                    <v-row class="fill-height" align="center" justify="center">
+                        <img src="../assets/glasses.jpg" alt="watch.jpg" width="400px" height="200px">
+                    </v-row>
+                </v-sheet>
+            </v-expand-transition>
+            <v-expand-transition>
+                <v-sheet v-if="model == 2" color="grey lighten-4" height="200" tile>
+                    <v-row class="fill-height" align="center" justify="center">
+                        <img src="../assets/hat.jpg" alt="watch.jpg" width="400px" height="200px">
+                    </v-row>
+                </v-sheet>
+            </v-expand-transition>
+            <v-expand-transition>
+                <v-sheet v-if="model == 3" color="grey lighten-4" height="200" tile>
+                    <v-row class="fill-height" align="center" justify="center">
+                        <img src="../assets/tshirt.jpg" alt="watch.jpg" width="400px" height="200px">
                     </v-row>
                 </v-sheet>
             </v-expand-transition>
@@ -83,6 +104,10 @@
 export default {
     data: () => ({
         model: null,
+        img: {
+            0: "../assets/watch.jpg",
+            1: "../assets/hat.jpg"
+        }
     }),
     computed: {
         watch: function() {

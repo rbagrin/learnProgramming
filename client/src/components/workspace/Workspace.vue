@@ -1,8 +1,26 @@
 <template v-slot:activator="{ on }">
     <v-container fill-height grid-list-md text-xs-center class="container">
         <v-row justify="space-around" align="center" style="margin: 0; padding: 0">
-            <v-col cols="12" md="4" xs="12">
+            <v-col v-if="ifImage || advancedImage" cols="12" md="4" xs="12">
                 <img src="../../assets/ionel-1.png" width="310px" height="520px">
+            </v-col>
+            <v-col v-if="ifImageCompleted" cols="12" md="4" xs="12">
+                <img src="../../assets/ionel-1-watch.png" width="310px" height="520px">
+            </v-col>
+            <v-col v-if="advancedImageCompleted" cols="12" md="4" xs="12">
+                <img src="../../assets/ionel-1-tshirt.png" width="310px" height="520px">
+            </v-col>
+            <v-col v-if="forImage" cols="12" md="4" xs="12">
+                <img src="../../assets/ionel-2.png" width="310px" height="520px">
+            </v-col>
+            <v-col v-if="forImageCompleted" cols="12" md="4" xs="12">
+                <img src="../../assets/ionel-2-glasses.png" width="310px" height="520px">
+            </v-col>
+            <v-col v-if="whileImage" cols="12" md="4" xs="12">
+                <img src="../../assets/ionel-3.png" width="310px" height="520px">
+            </v-col>
+            <v-col v-if="whileImageCompleted" cols="12" md="4" xs="12">
+                <img src="../../assets/ionel-3-hat.png" width="310px" height="520px">
             </v-col>
             <v-dialog v-model="snackbar_award" max-width="1100">
                 <v-card>
@@ -173,7 +191,31 @@ export default {
         },
         questionCategory() {
 
-            return this.questions[this.level].category
+            return this.questions[this.level].category;
+        },
+        ifImage() {
+            return this.category == "0x01" && !this.$store.getters.if_award;
+        },
+        ifImageCompleted() {
+            return this.category == "0x01" && this.$store.getters.if_award;
+        },
+        whileImage() {
+            return this.category == "0x02" && !this.$store.getters.while_award;
+        },
+        whileImageCompleted() {
+            return this.category == "0x02" && this.$store.getters.while_award;
+        },
+        forImage() {
+            return this.category == "0x03" && !this.$store.getters.for_award;
+        },
+        forImageCompleted() {
+            return this.category == "0x03" && this.$store.getters.for_award;
+        },
+        advancedImage() {
+            return this.category == "0x00" && !this.$store.getters.advanced_award;
+        },
+        advancedImageCompleted() {
+            return this.category == "0x00" && this.$store.getters.advanced_award;
         }
     },
     methods: {
