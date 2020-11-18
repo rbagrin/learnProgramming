@@ -3,8 +3,12 @@ const Questions = require("../data").Questions;
 const add = async (category, option1, option2, correctAnswer, mainBranch, optionalBranch, message) => {
 
     let level = 0;
-    await Questions.find({category: category})
-        .sort({level: -1})
+    await Questions.find({
+            category: category
+        })
+        .sort({
+            level: -1
+        })
         .limit(1)
         .exec(async (err, data) => {
 

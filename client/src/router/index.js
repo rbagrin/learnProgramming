@@ -6,8 +6,7 @@ const Store = require("../store/store").store;
 
 Vue.use(VueRouter);
 
-const routes = [
-    {
+const routes = [{
         path: "/",
         name: "Home",
         component: Home,

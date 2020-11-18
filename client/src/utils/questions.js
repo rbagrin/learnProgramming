@@ -1,4 +1,5 @@
 module.exports = {
+    // TODO: Translate questions
     allQuestions: [
         {
             category: 0x01, // if

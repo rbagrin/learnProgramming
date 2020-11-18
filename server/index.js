@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 // Routes
 app.use('/', require('./src/routes'));
 
-// Handler de erori declarat ca middleware
+// Middleware - error handler
 app.use((err, req, res, next) => {
     console.trace(err);
     let status = 500;

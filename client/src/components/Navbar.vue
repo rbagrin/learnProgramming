@@ -102,6 +102,10 @@ export default {
     },
 
     methods: {
+
+        /**
+         * Log user out
+         */
         logout() {
 
             this.$store.dispatch('LOGOUT');

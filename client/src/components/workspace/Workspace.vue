@@ -35,7 +35,7 @@
                                     <p style="text-size: 35px">{{questions[level].message}}</p>
                                 </div>
                                 <img src="../../assets/watch.jpg" width="500px" height="250px">
-                                <p style="text-size: 35px">Tocmai ai deblocat ceasul de mână!</p>
+                                <p style="text-size: 35px">You just unlocked the watch!</p>
                             </v-col>
                         </v-row>
                         <div>
@@ -44,13 +44,13 @@
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="green" text @click="goToAwards()">Mergi la premii</v-btn>
+                        <v-btn color="green" text @click="goToAwards()">Go to awards</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
             <v-dialog v-model="snackbar_true" max-width="600">
                 <v-card>
-                    <v-card-title class="headline" style="text-size: 45px">Răspuns Corect!</v-card-title>
+                    <v-card-title class="headline" style="text-size: 45px">Correct Answer!</v-card-title>
                     <v-card-text>
                         <div>
                             <p style="text-size: 35px">{{questions[level].message}}</p>
@@ -58,16 +58,16 @@
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="green" text @click="nextQuestion()">Următoarea întrebare</v-btn>
+                        <v-btn color="green" text @click="nextQuestion()">Next question</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
             <v-dialog v-model="snackbar_false" max-width="600">
                 <v-card>
-                    <v-card-title class="headline" style="text-size: 45px">Răspuns Incorect!</v-card-title>
+                    <v-card-title class="headline" style="text-size: 45px">Incorrect Answer!</v-card-title>
                     <v-card-text>
                         <div>
-                            <p style="text-size: 35px">Mai încearcă!</p>
+                            <p style="text-size: 35px">Try again!</p>
                         </div>
                     </v-card-text>
                 </v-card>
@@ -107,7 +107,7 @@
                             <v-spacer></v-spacer>
                             <v-btn color="#6f6" @click="check_answer()">
                                 <v-icon left>check_circle</v-icon>
-                                <span style="font-weight: bold; font-size: 20px">VERIFICĂ</span>
+                                <span style="font-weight: bold; font-size: 20px">CHECK</span>
                             </v-btn>
                         </v-card-actions>
                     </v-card>
@@ -128,7 +128,6 @@
                             </Card>
                         </Board>
                     </v-col>
-
                 </v-row>
             </v-col>
         </v-row>
@@ -161,18 +160,18 @@ export default {
             
             questionSkeleton: {
                 0x01: {
-                    condition: "Dacă",
-                    mainPath: "atunci",
-                    optionalPath: "altfel"
+                    condition: "If",
+                    mainPath: "then",
+                    optionalPath: "else"
                 },
                 0x02: {
-                    condition: "Cât timp",
-                    mainPath: "execută",
+                    condition: "While",
+                    mainPath: "execute",
                     optionalPath: null
                 },
                 0x03: {
-                    condition: "Pentru",
-                    mainPath: "repetă",
+                    condition: "For",
+                    mainPath: "repeat",
                     optionalPath: null
                 }
             }
@@ -219,6 +218,10 @@ export default {
         }
     },
     methods: {
+
+        /**
+         * Check user's answer
+         */
         check_answer() {
 
             let isCorrectAnswer = false;
@@ -269,6 +272,10 @@ export default {
             // if wrong answer show try again dialog
             this.snackbar_false = true;
         },
+
+        /**
+         * Get next question
+         */
         nextQuestion() {
 
             this.snackbar_true = false;
@@ -282,10 +289,18 @@ export default {
             this.questionCategory = this.questions[this.level].category;
 
         },
+
+        /**
+         * Go to /awards route
+         */
         goToAwards() {
             this.snackbar_award = false;
             this.$router.push("/awards");
         },
+
+        /**
+         * @returns {Boolean}
+         */
         isDescendant(parent, child) {
 
             var node = child.parentNode;

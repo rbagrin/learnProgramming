@@ -9,23 +9,23 @@
 
             <v-card>
                 <v-card-title class="headline grey lighten-2" primary-title>
-                    Adaugă întrebare quiz
+                    Add Quiz Question
                 </v-card-title>
 
                 <v-card-text>
                     <v-form ref="form" v-model="valid">
-                        <v-select v-model="category" :items="categories" :rules="[v => !!v || 'Categoria este obligatorie.']" label="Categorie"
+                        <v-select v-model="category" :items="categories" :rules="[v => !!v || 'Category is mandatory.']" label="Category"
                             required></v-select>
-                        <v-text-field v-model="option1" :counter="true" :rules="optionRules" label="Opțiunea 1" required></v-text-field>
-                        <v-text-field v-model="option2" :counter="true" :rules="optionRules" label="Opțiunea 2" required></v-text-field>
+                        <v-text-field v-model="option1" :counter="true" :rules="optionRules" label="Option 1" required></v-text-field>
+                        <v-text-field v-model="option2" :counter="true" :rules="optionRules" label="Option 2" required></v-text-field>
 
-                        <v-radio-group v-model="correctAnswer" label="Răspuns corect:" row mandatory>
-                            <v-radio class="mx-6" label="Opțiunea 1" value="option1"></v-radio>
-                            <v-radio class="mx-6" label="Opțiunea 2" value="option2"></v-radio>
+                        <v-radio-group v-model="correctAnswer" label="Correct answer:" row mandatory>
+                            <v-radio class="mx-6" label="Option 1" value="option1"></v-radio>
+                            <v-radio class="mx-6" label="Option 2" value="option2"></v-radio>
                         </v-radio-group>
 
-                        <v-text-field v-model="mainBranch" :counter="true" :rules="mainBranchRules" label="Ramură principală" required></v-text-field>
-                        <v-text-field v-model="optionalBranch" :counter="true" :rules="optionalBranchRules" label="Ramură opțională"></v-text-field>
+                        <v-text-field v-model="mainBranch" :counter="true" :rules="mainBranchRules" label="Main branch" required></v-text-field>
+                        <v-text-field v-model="optionalBranch" :counter="true" :rules="optionalBranchRules" label="Optional branch"></v-text-field>
                         
 
                         
@@ -37,7 +37,7 @@
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn :disabled="!valid" color="primary" text @click="addQuestion">
-                        Adaugă întrebare
+                        Add Question
                     </v-btn>
                 </v-card-actions>
             </v-card>
@@ -57,34 +57,37 @@ export default {
             category: null,
             valid: true,
             optionRules: [
-                v => !!v || 'Optiunile sunt obligatoriu de completat',
-                v => (v && v.length >= 3) || 'Optiunile trebuie sa aiba minim 3 caractere.',
-                v => (v && v.length <= 15) || 'Optiunile trebuie sa aiba maxim 15 caractere.',
+                v => !!v || 'Options are mandatory',
+                v => (v && v.length >= 3) || 'Options must have minimum 3 characters.',
+                v => (v && v.length <= 15) || 'Options must have maximum 15 characters.',
             ],
             mainBranchRules: [
-                v => (v && v.length >= 3) || 'Ramura principală trebuie să aibă minim 3 caractere.',
-                v => (v && v.length <= 15) || 'Ramura principală trebuie să aibă maxim 15 caractere.',
+                v => (v && v.length >= 3) || 'Main branch must have minimum 3 characters.',
+                v => (v && v.length <= 15) || 'Main branch must have maximum 15 characters.',
             ],
             optionalBranchRules: [
-                v => ((v && v.length >= 3) || !v) || 'Ramura opțională trebuie să aibă minim 3 caractere.',
-                v => ((v && v.length <= 15) || !v) || 'Ramura opțională trebuie să aibă maxim 15 caractere.',
+                v => ((v && v.length >= 3) || !v) || 'Optional branch must have minimum 3 characters.',
+                v => ((v && v.length <= 15) || !v) || 'Optional branch must have maximum 15 characters.',
             ],
             categories: [
-                'Dacă',
-                'Pentru',
-                'Cât timp',
-                'Avansat'
+                'If',
+                'For',
+                'While',
+                'Advanced'
             ],
             categoriesStringToIntMapping: {
-                'Avansat': 0x00,
-                'Dacă': 0x01,
-                'Pentru': 0x02,
-                'Cât timp': 0x03
+                'Advanced': 0x00,
+                'If': 0x01,
+                'For': 0x02,
+                'While': 0x03
             },
             dialog: false
         }
     },
     methods: {
+        /**
+         * Add Quiz question
+         */
         async addQuestion() {
             this.loading = true;
 
@@ -112,6 +115,9 @@ export default {
             this.loading = false;
             this.dialog = false;
         },
+        /**
+         * Validates form
+         */
         validate() {
             this.$refs.form.validate()
         }

@@ -13,6 +13,7 @@ module.exports = {
         QUESTIONS_URL: 'http://localhost:5000/questions/'
     },
     DEFINITIONS: {
+        // TODO: Change messages
         IF: `// Instrucțiunea if-else (dacă-altfel) este folosită 
  // pentru a exprima decizii.
  // Sintaxa instrucțiunii if-else arata așa:

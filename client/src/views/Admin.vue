@@ -5,7 +5,7 @@
                 <v-list dark>
                     <v-subheader>
                         <v-row justify="space-between">
-                            <v-col cols="12" md="3">ÎNTREBĂRI</v-col>
+                            <v-col cols="12" md="3">QUESTIONS</v-col>
                             <v-col cols="12" md="2">
                                 <AddQuestion />
                             </v-col>
@@ -13,10 +13,10 @@
                     </v-subheader>
 
                         <v-radio-group v-model="questionCategory" row mandatory class="mx-6">
-                            <v-radio label="Dacă" value=0x01></v-radio>
-                            <v-radio label="Pentru" value=0x02></v-radio>
-                            <v-radio label="Cât timp" value=0x03></v-radio>
-                            <v-radio label="Avansat" value=0x00></v-radio>
+                            <v-radio label="If" value=0x01></v-radio>
+                            <v-radio label="For" value=0x02></v-radio>
+                            <v-radio label="While" value=0x03></v-radio>
+                            <v-radio label="Advanced" value=0x00></v-radio>
                         </v-radio-group>
                         
                     <v-list-item-group v-model="question" color="primary" :ripple=false>
@@ -46,7 +46,7 @@
                 <v-list dark>
                     <v-subheader>
                         <v-row justify="space-between">
-                            <v-col cols="12" md="3">UTILIZATORI</v-col>
+                            <v-col cols="12" md="3">USERS</v-col>
                             <v-col cols="12" md="2">
                                 <AddUser :users="users" />
                             </v-col>
@@ -109,10 +109,10 @@ export default {
     methods: {
         questionCategoryMapping: function(category) {
             const mapping = {
-                0x00: "Avansat",
-                0x01: "Dacă",
-                0x02: "Pentru",
-                0x03: "Cât timp"
+                0x00: "Advanced",
+                0x01: "If",
+                0x02: "For",
+                0x03: "While"
             }
 
             return mapping[category];
@@ -148,7 +148,3 @@ export default {
     },
 };
 </script>
-
-<style>
-
-</style>

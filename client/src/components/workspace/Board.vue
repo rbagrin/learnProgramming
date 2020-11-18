@@ -18,6 +18,9 @@
 export default {
     props: ['id'],
     methods: {
+        /**
+         * Handles element drop
+         */
         drop(e) {
 
             const card_id = e.dataTransfer.getData('card_id');
@@ -25,19 +28,28 @@ export default {
 
             card.style.display = "block";
 
-            // Daca casuta e deja ocupata nu mai adauga alt element
+            // If box contains an element don't add the other element
             if (e.target.childElementCount === 0) {
                 e.target.appendChild(card);
             }
 
             document.getElementById(e.target.id).className = 'board';
         },
+        /**
+         * On drag enter
+         */
         dragEnter: (e) => {
             document.getElementById(e.target.id).className = 'board hovered';
         },
+        /**
+         * On drag leave
+         */
         dragLeave: (e) => {
             document.getElementById(e.target.id).className = 'board';
         },
+        /**
+         * On drag start
+         */
         dragStart: (e) => {
 
 
@@ -47,6 +59,9 @@ export default {
                 target.style.display = "none";
             }, 0);
         },
+        /**
+         * On drag end
+         */
         dragEnd: (e) => {
             e.target.style.display = "block";
         }

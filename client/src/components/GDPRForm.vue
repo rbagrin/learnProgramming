@@ -4,37 +4,57 @@
             <template v-slot:activator="{ on }">
                 <v-btn class="light-green darken-2 white--text m3" large v-on="on">
                     <v-icon left>email</v-icon>
-                    <span>Înregistrare</span>
+                    <span>Register</span>
                 </v-btn>
             </template>
 
             <v-card>
                 <v-card-title class="headline grey lighten-2" primary-title>
-                    Formular GDPR
+                    Our Company Privacy Policy
                 </v-card-title>
 
                 <v-card-text>
-                    <p>Conținut:
+                    <p style="margin-top: 10px">Our Company is part of the Our Company Group which includes Our Company
+                        International and Our Company Direct. This privacy policy will explain how our organization uses
+                        the personal data we collect from you when you use our website.</p>
+                    <p>Topics:
                         <ul>
-                            <li>Cine suntem?</li>
-                            <li>În ce scopuri dorim să utilizăm datele dumneavoastră?</li>
-                            <li>Ce vom face cu datele dumneavoastră?</li>
+                            <li>What data do we collect?</li>
+                            <li>How do we collect your data?</li>
+                            <li>How do we store your data?</li>
                         </ul>
                     </p>
-                    <h2>Cine suntem?</h2>
-                    <p>Denumirea societații care vă solicită consimțâmantul pentru utilizarea datelor dumneavoastră, în scopurile specificate în acest formular, este: <b>Let'sProgram</b></p>
-                    <h2>Dorim să utilizăm următoarele date cu caracter personal:</h2>
-                    <ul>
-                            <li>Nume, Prenume</li>
-                            <li>Email</li>
+                    <h2>What data do we collect?</h2>
+                    <p>Our Company collects the following data:
+                        <ul>
+                            <li>Personal identification information (Name, email address, phone number, etc.)</li>
                         </ul>
-                    <h2>În ce scopuri dorim să utilizăm datele dumneavoastră?</h2>
-                    <p>Datele dumneavoastră vor fi folosite exclusiv în scopul creării și gestionării contului.</p>
-
-                    <h2>Ce vom face cu datele dumneavoastră?</h2>
-                    <p>Let'sProgram poate furniza datele dumneavoastră cu caracter personal altor companii afiliate sau cu care se află în relații de parteneriat, dar numai în scopurile specificate aici.</p>
-                    <p>Datele dumneavoastră ar mai putea fi transmise organelor de poliție, parchet, instanțe judecătorești sau altor instituții care exercită autoritatea de stat, în măsura în care au atribuții legale în sensul primirii unor astfel de date și în strictă concordanță cu prevederile legale aplicabile.</p>
-                    <p>Datele dumneavoastră nu vor face obiectul unui proces decizional individual automatizat care să producă efecte juridice asupra dumneavoastră.</p>
+                    </p>
+                    <h2>How do we collect your data?</h2>
+                    <p>You directly provide Our Company with most of the data we collect. We collect data and process
+                        data when you:
+                        <ul>
+                            <li>Register online or place an order for any of our products or services.</li>
+                            <li>Voluntarily complete a customer survey or provide feedback on any of our message boards
+                                or via email.</li>
+                            <li>Use or view our website via your browser’s cookies.</li>
+                        </ul>
+                    </p>
+                    <h2>How will we use your data?</h2>
+                    <p>Our Company collects your data so that we can:
+                        <ul>
+                            <li>Process your order and manage your account.</li>
+                            <li>Email you with special offers on other products and services we think you might like.
+                            </li>
+                        </ul>
+                    </p>
+                    <p>When Our Company processes your order, it may send your data to, and also use the resulting
+                        information from, credit reference agencies to prevent fraudulent purchases.</p>
+                    <h2>How do we store your data?</h2>
+                    <p>Our Company securely stores your data at [enter the location and describe security precautions
+                        taken].</p>
+                    <p>Our Company will keep your [enter type of data] for [enter time period]. Once this time period
+                        has expired, we will delete your data by [enter how you delete users’ data].</p>
                 </v-card-text>
 
                 <v-divider></v-divider>

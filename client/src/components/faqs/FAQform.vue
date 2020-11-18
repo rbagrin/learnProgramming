@@ -4,13 +4,13 @@
             <template v-slot:activator="{ on }">
                 <v-btn color="#4DB6AC" dark v-on="on">
                     <v-icon left>add</v-icon>
-                    <span>Întrebare</span>
+                    <span>Question</span>
                 </v-btn>
             </template>
 
             <v-card>
                 <v-card-title class="headline grey lighten-2" primary-title>
-                    Ai o întrebare?
+                    Do you have a question?
                 </v-card-title>
 
                 <v-card-text>
@@ -23,14 +23,14 @@
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn color="primary" text @click="submit" :loading="loading" :disabled="loading">
-                        Trimite
+                        Send
                     </v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
 
         <v-snackbar v-model="snackbar" top color="success" :timeout="3000">
-            <span>Întrebare adresată cu succes. Un membru de la support vă va răspunde în cel mai scurt timp.</span>
+            <span>Question added successfully.</span>
             <v-btn color="white" text @click="snackbar = false">
                 <v-icon>close</v-icon>
             </v-btn>
@@ -57,6 +57,9 @@ export default {
         };
     },
     methods: {
+        /**
+         * Submit question
+         */
         async submit() {
             this.loading = true;
             let data = {

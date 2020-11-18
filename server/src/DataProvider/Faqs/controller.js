@@ -31,7 +31,6 @@ router.get('/', authorizeAndExtractToken, authorizeRoles(adminRole, supportRole,
             faqs: faqs
         });
     } catch (err) {
-        // daca primesc eroare, pasez eroarea mai departe la handler-ul de errori declarat ca middleware
         next(err);
     }
 });

@@ -154,7 +154,12 @@ router.put('/:id', authorizeAndExtractToken, authorizeRoles(adminRole), async (r
 router.put('/:id/awards', authorizeAndExtractToken, async (req, res, next) => {
 
     const id = req.params.id;
-    const {watch, glasses, hat, tshirt} = req.body.awards;
+    const {
+        watch,
+        glasses,
+        hat,
+        tshirt
+    } = req.body.awards;
 
     try {
 
@@ -179,7 +184,12 @@ router.put('/:id/awards', authorizeAndExtractToken, async (req, res, next) => {
 
         validateFields(fieldsToBeValidated);
 
-        await UsersService.updateAwardsById(id, {watch, glasses, hat, tshirt});
+        await UsersService.updateAwardsById(id, {
+            watch,
+            glasses,
+            hat,
+            tshirt
+        });
 
         res.json({
             success: true,

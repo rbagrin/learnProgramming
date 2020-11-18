@@ -1,16 +1,10 @@
 <template>
     <v-container class="faq my-5">
-        <h1 style="color: #fff">Întrebări frecvente - Support</h1>
+        <h1 style="color: #fff">Frequently Asked Questions - Support</h1>
 
 
         <v-card dark color="#00695C" class="mx-0 px-2">
             <v-row v-if="true" class="justify-start mx-0">
-                <!-- <v-select
-                v-model="questionSelect"
-                :items="questions"
-                label="Display questions"
-                required
-            ></v-select> -->
 
                 <v-radio-group v-model="questionSelect" row>
                     <v-radio class="mx-6" label="Toate " value="All questions"></v-radio>

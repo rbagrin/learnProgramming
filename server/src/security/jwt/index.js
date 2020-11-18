@@ -16,8 +16,8 @@ const options = {
 };
 
 /**
- * Functie ce genereaza tokenul de autorizare
- * @param { {String, String} } payload de forma {userId, userRole}
+ * Generates authentification token
+ * @param { {String, String} } payload {userId, userRole}
  * @returns { String } token
  */
 const generateToken = (payload) => {
@@ -28,12 +28,12 @@ const generateToken = (payload) => {
     } catch (err) {
 
         console.trace(err);
-        throw new ServerError("Eroare la codificarea tokenului!", 500);
+        throw new ServerError("Error on token encode!", 500);
     }
 };
 
 /**
- * Verifica tokenul si decodeaza datele din token.
+ * Verifies token and decodes data from token
  * @param {String} token
  * @returns {*}
  */
@@ -45,12 +45,12 @@ const verifyAndDecodeData = (token) => {
     } catch (err) {
 
         console.trace(err);
-        throw new ServerError("Eroare la decodificarea tokenului!", 500);
+        throw new ServerError("Eroare on token decode!", 500);
     }
 };
 
 /**
- * Autorizeaza requestul si extrage tokenul
+ * Authorizes request and extract token
  * @param {*} req 
  * @param {*} res 
  * @param {*} next 
@@ -62,7 +62,7 @@ const authorizeAndExtractToken = (req, res, next) => {
 
             throw new ServerError('Lipseste headerul de autorizare!', 403);
         }
-        const token = req.headers.authorization.split(" ")[1]; // se separa dupa " " deoarece este de forma: Bearer 1wqeiquqwe0871238712qwe
+        const token = req.headers.authorization.split(" ")[1];
 
         validateFields({
             jwt: {

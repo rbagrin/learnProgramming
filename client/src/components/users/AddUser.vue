@@ -9,19 +9,19 @@
 
             <v-card>
                 <v-card-title class="headline grey lighten-2" primary-title>
-                    Adaugă utilizator
+                    Add user
                 </v-card-title>
 
                 <v-card-text>
                     <v-form ref="form" v-model="valid">
-                        <v-text-field v-model="name" :counter="true" :rules="nameRules" label="Nume" required>
+                        <v-text-field v-model="name" :counter="true" :rules="nameRules" label="Name" required>
                         </v-text-field>
 
                         <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
 
                         <v-text-field v-model="password" :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                             :rules="passwordRules" :type="showPassword ? 'text' : 'password'" name="password"
-                            label="Parolă" hint="At least 8 characters" counter
+                            label="Password" hint="At least 8 characters" counter
                             @click:append="showPassword = !showPassword"></v-text-field>
 
                         <v-select v-model="role" :items="roles" :rules="[v => !!v || 'Role is required']" label="Rol"
@@ -34,7 +34,7 @@
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn :disabled="!valid" color="primary" text @click="addUser">
-                        Adaugă
+                        Add
                     </v-btn>
                 </v-card-actions>
             </v-card>
@@ -73,6 +73,9 @@ export default {
         }
     },
     methods: {
+        /**
+         * Adds user
+         */
         async addUser() {
             this.loading = true;
 
@@ -97,6 +100,9 @@ export default {
             this.loading = false;
             this.dialog = false;
         },
+        /**
+         * Validates form
+         */
         validate() {
             this.$refs.form.validate()
         },

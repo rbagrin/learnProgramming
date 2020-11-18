@@ -13,7 +13,7 @@ const authorizeRoles = (...roles) => {
                 return next();
             }
         }
-        throw new ServerError('Nu sunteti autorizat sa accesati resursa!', 401);
+        throw new ServerError('Unauthorized!', 401);
     }
 };
 
